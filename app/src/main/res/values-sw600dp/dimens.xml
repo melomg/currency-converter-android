@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="toolbar_title_start_margin_size">80dp</dimen>
+</resources>

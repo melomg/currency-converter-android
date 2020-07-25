@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply from: '../core_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildToolsVersion
+
+    lintOptions {
+        abortOnError false
+    }
+
+    defaultConfig {
+        applicationId "io.melih.android.currencyconverter"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resValue "string", "app_name", "CurrencyConverter"
+        buildConfigField("String", "CURRENCY_BASE_URL", '"https://api.exchangeratesapi.io/"')
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            testCoverageEnabled true
+        }
+        release {
+            debuggable false
+            zipAlignEnabled true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        dev {
+            dimension "default"
+            applicationIdSuffix ".test"
+            resValue "string", "app_name", "CurrencyConverter Test"
+        }
+        prod {
+            dimension "default"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation project(':model')
+
+    // Support
+    implementation "androidx.appcompat:appcompat:${versions.androidx_appcompat}"
+    implementation "androidx.annotation:annotation:${versions.androidx_annotation}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerview}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraint_layout}"
+
+    // Dagger.Android
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:${versions.stetho}"
+
+    // Coroutines Retrofit Adapter
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${versions.coroutines_retrofit_adapter}"
+
+    // Network
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3_logging_interceptor}"
+    implementation "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
+
+    // Room
+    implementation "androidx.room:room-runtime:${versions.room}"
+    kapt "androidx.room:room-compiler:${versions.room}"
+    testImplementation "androidx.room:room-testing:${versions.room}"
+
+}
+
+androidExtensions {
+    experimental = true
+}

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<array name="eur">
+		<item>EUR</item>
+		<item>Euro</item>
+		<item>@drawable/ic_european_union</item>
+	</array>
+
+	<array name="aud">
+		<item>AUD</item>
+		<item>Australian Dollar</item>
+		<item>@drawable/ic_australia</item>
+	</array>
+
+	<array name="bgn">
+		<item>BGN</item>
+		<item>Bulgarian Lev</item>
+		<item>@drawable/ic_bulgaria</item>
+	</array>
+
+	<array name="brl">
+		<item>BRL</item>
+		<item>Brazilian Real</item>
+		<item>@drawable/ic_brazil</item>
+	</array>
+
+	<array name="cad">
+		<item>CAD</item>
+		<item>Canadian Dollar</item>
+		<item>@drawable/ic_canada</item>
+	</array>
+
+	<array name="chf">
+		<item>CHF</item>
+		<item>Swiss Franc</item>
+		<item>@drawable/ic_switzerland</item>
+	</array>
+
+	<array name="cny">
+		<item>CNY</item>
+		<item>Chinese Yuan</item>
+		<item>@drawable/ic_china</item>
+	</array>
+
+	<array name="czk">
+		<item>CZK</item>
+		<item>Czech Koruna</item>
+		<item>@drawable/ic_czech</item>
+	</array>
+
+	<array name="dkk">
+		<item>DKK</item>
+		<item>Danish Krone</item>
+		<item>@drawable/ic_denmark</item>
+	</array>
+
+	<array name="gbp">
+		<item>GBP</item>
+		<item>British Pound</item>
+		<item>@drawable/ic_united_kingdom</item>
+	</array>
+
+	<array name="hkd">
+		<item>HKD</item>
+		<item>Hong Kong Dollar</item>
+		<item>@drawable/ic_hong_kong</item>
+	</array>
+
+	<array name="hrk">
+		<item>HRK</item>
+		<item>Croatian Kuna</item>
+		<item>@drawable/ic_croatia</item>
+	</array>
+
+	<array name="huf">
+		<item>HUF</item>
+		<item>Hungarian Forint</item>
+		<item>@drawable/ic_hungary</item>
+	</array>
+
+	<array name="idr">
+		<item>IDR</item>
+		<item>Indonesian Rupiah</item>
+		<item>@drawable/ic_indonesia</item>
+	</array>
+
+	<array name="ils">
+		<item>ILS</item>
+		<item>Israeli New Shekel</item>
+		<item>@drawable/ic_israel</item>
+	</array>
+
+	<array name="inr">
+		<item>INR</item>
+		<item>Indian Rupee</item>
+		<item>@drawable/ic_india</item>
+	</array>
+
+	<array name="isk">
+		<item>ISK</item>
+		<item>Icelandic Króna</item>
+		<item>@drawable/ic_iceland</item>
+	</array>
+
+	<array name="jpy">
+		<item>JPY</item>
+		<item>Japanese Yen</item>
+		<item>@drawable/ic_japan</item>
+	</array>
+
+	<array name="krw">
+		<item>KRW</item>
+		<item>South Korean Won</item>
+		<item>@drawable/ic_south_korea</item>
+	</array>
+
+	<array name="mxn">
+		<item>MXN</item>
+		<item>Mexican Peso</item>
+		<item>@drawable/ic_mexico</item>
+	</array>
+
+	<array name="myr">
+		<item>MYR</item>
+		<item>Malaysian Ringgit</item>
+		<item>@drawable/ic_malaysia</item>
+	</array>
+
+	<array name="nok">
+		<item>NOK</item>
+		<item>Norwegian Krone</item>
+		<item>@drawable/ic_norway</item>
+	</array>
+
+	<array name="nzd">
+		<item>NZD</item>
+		<item>New Zealand Dollar</item>
+		<item>@drawable/ic_new_zealand</item>
+	</array>
+
+	<array name="php">
+		<item>PHP</item>
+		<item>Philippine Peso</item>
+		<item>@drawable/ic_philippines</item>
+	</array>
+
+	<array name="pln">
+		<item>PLN</item>
+		<item>Polish Złoty</item>
+		<item>@drawable/ic_poland</item>
+	</array>
+
+	<array name="ron">
+		<item>RON</item>
+		<item>Romanian Leu</item>
+		<item>@drawable/ic_romania</item>
+	</array>
+
+	<array name="rub">
+		<item>RUB</item>
+		<item>Russian Ruble</item>
+		<item>@drawable/ic_russia</item>
+	</array>
+
+	<array name="sek">
+		<item>SEK</item>
+		<item>Swedish Krona</item>
+		<item>@drawable/ic_sweden</item>
+	</array>
+
+	<array name="sgd">
+		<item>SGD</item>
+		<item>Singapore Dollar</item>
+		<item>@drawable/ic_singapore</item>
+	</array>
+
+	<array name="thb">
+		<item>THB</item>
+		<item>Thai Baht</item>
+		<item>@drawable/ic_thailand</item>
+	</array>
+
+	<array name="tr">
+		<item>TRY</item>
+		<item>Turkish Lira</item>
+		<item>@drawable/ic_turkey</item>
+	</array>
+
+	<array name="usd">
+		<item>USD</item>
+		<item>US Dollar</item>
+		<item>@drawable/ic_united_states</item>
+	</array>
+
+	<array name="zar">
+		<item>ZAR</item>
+		<item>South African Rand</item>
+		<item>@drawable/ic_south_africa</item>
+	</array>
+
+</resources>

@@ -1,0 +1,31 @@
+<resources>
+
+	<style name="Currency"/>
+
+	<style name="Currency.Code">
+		<item name="android:fontFamily">sans-serif-medium</item>
+		<item name="android:textColor">@color/text_normal</item>
+		<item name="android:textSize">@dimen/currency_code_text_size</item>
+		<item name="fontFamily">sans-serif-medium</item>
+	</style>
+
+	<style name="Currency.Name">
+		<item name="android:fontFamily">sans-serif-medium</item>
+		<item name="android:textColor">@color/text_secondary</item>
+		<item name="android:textSize">@dimen/currency_name_text_size</item>
+		<item name="fontFamily">sans-serif-medium</item>
+	</style>
+
+	<style name="Currency.Amount">
+		<item name="android:digits">0123456789</item>
+		<item name="android:fontFamily">sans-serif-medium</item>
+		<item name="android:hint">@string/hint_zero</item>
+		<item name="android:imeOptions">actionDone</item>
+		<item name="android:inputType">number</item>
+		<item name="android:maxLength">12</item>
+		<item name="android:textAlignment">textEnd</item>
+		<item name="android:textColor">@color/text_normal</item>
+		<item name="android:textSize">@dimen/currency_amount_text_size</item>
+		<item name="fontFamily">sans-serif-medium</item>
+	</style>
+</resources>

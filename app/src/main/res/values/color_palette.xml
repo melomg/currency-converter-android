@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- COLOR PALETTE -->
+
+	<color name="black">#000000</color>
+	<color name="black_04">#E6E6E6</color>
+	<color name="black_08">#191C1F</color>
+	<color name="black_06">#8B959E</color>
+
+	<color name="white">#FFFFFF</color>
+</resources>

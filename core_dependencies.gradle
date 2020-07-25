@@ -1,0 +1,23 @@
+dependencies {
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "androidx.core:core-ktx:${versions.androidx_core_ktx}"
+
+    // ViewModel extension
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.viewmodel_ktx}"
+
+    // Logger
+    implementation "com.jakewharton.timber:timber:${versions.timber}"
+
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leak_canary}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+
+}
