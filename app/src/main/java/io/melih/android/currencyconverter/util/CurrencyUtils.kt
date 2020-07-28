@@ -35,12 +35,12 @@ fun <T> moveSelectedCurrencyToTop(list: MutableList<T>, predicate: (T) -> Boolea
     return baseCurrency
 }
 
-fun BigDecimal.convertCurrencyAndFormat(baseCurrencyRate: BigDecimal, amount: String): String =
-    convertCurrency(baseCurrencyRate, amount.replace("[^0-9.]".toRegex(), "")).toString()
+fun BigDecimal.convertCurrencyAndFormat(baseCurrencyRate: BigDecimal, amount: BigDecimal): String =
+    convertCurrency(baseCurrencyRate, amount).toString()
 
-private fun BigDecimal.convertCurrency(baseCurrencyRate: BigDecimal, amount: String): BigDecimal =
+private fun BigDecimal.convertCurrency(baseCurrencyRate: BigDecimal, amount: BigDecimal): BigDecimal =
     try {
-        ((this * amount.toBigDecimal()) / baseCurrencyRate)
+        ((this * amount) / baseCurrencyRate)
     } catch (e: NumberFormatException) {
         BigDecimal.ZERO
     }

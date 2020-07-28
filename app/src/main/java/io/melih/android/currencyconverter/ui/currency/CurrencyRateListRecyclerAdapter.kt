@@ -22,12 +22,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import io.melih.android.currencyconverter.R
 import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_AMOUNT
+import java.math.BigDecimal
 
 internal const val KEY_CURRENCY_VALUE = "KEY_CURRENCY_VALUE"
 
 class CurrencyRateListRecyclerAdapter(
     diffUtilItemCallback: DiffUtil.ItemCallback<CurrencyItemUIModel>,
-    private val amountListener: (String) -> Unit,
+    private val amountListener: (BigDecimal) -> Unit,
     private val itemClickListener: (CurrencyItemUIModel) -> Unit
 ) : ListAdapter<CurrencyItemUIModel, CurrencyRateViewHolder>(diffUtilItemCallback) {
 
@@ -44,7 +45,7 @@ class CurrencyRateListRecyclerAdapter(
             return
         }
         val bundle = payloads[0] as Bundle
-        val currencyValue = bundle.getString(KEY_CURRENCY_VALUE) ?: DEFAULT_CURRENCY_AMOUNT
+        val currencyValue = bundle.getString(KEY_CURRENCY_VALUE) ?: DEFAULT_CURRENCY_AMOUNT.toPlainString()
         viewHolder.bindTo(position, currencyValue)
     }
 

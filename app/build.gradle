@@ -61,8 +61,25 @@ android {
 
 }
 
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+
+repositories {
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/melomg/android-customviews")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+}
+
 dependencies {
     implementation project(':model')
+
+    implementation 'melih.android.customviews:library:1.0.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
 
     // Support
     implementation "androidx.appcompat:appcompat:${versions.androidx_appcompat}"

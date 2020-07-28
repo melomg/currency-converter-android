@@ -30,6 +30,7 @@ import io.melih.android.currencyconverter.repository.CurrencyRepository
 import io.melih.android.currencyconverter.util.event.Event
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 import javax.inject.Inject
 
 @ActivityScope
@@ -39,7 +40,7 @@ class CurrencyViewModel @Inject constructor(
     private val currencyRepository: CurrencyRepository
 ) : ViewModel() {
 
-    var amount: String = DEFAULT_CURRENCY_AMOUNT
+    var amount: BigDecimal = DEFAULT_CURRENCY_AMOUNT
 
     @VisibleForTesting
     var selectedCurrencyCode = MutableLiveData<String>()

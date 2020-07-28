@@ -32,7 +32,7 @@ import javax.inject.Singleton
 class CurrencyDisplayableItemMapper(private val applicationContext: Context) {
 
     @SuppressLint("ResourceType")
-    fun toCurrencyItemUIModel(convertedCurrency: Currency, baseCurrencyRate: BigDecimal, amount: String): CurrencyItemUIModel {
+    fun toCurrencyItemUIModel(convertedCurrency: Currency, baseCurrencyRate: BigDecimal, amount: BigDecimal): CurrencyItemUIModel {
         val countryResource = Country.fromCurrencyCode(convertedCurrency.currencyCode)
 
         val countryTypedArray: TypedArray = applicationContext.resources.obtainTypedArray(countryResource.currencyCodeResId)
@@ -49,7 +49,7 @@ class CurrencyDisplayableItemMapper(private val applicationContext: Context) {
         return CurrencyItemUIModel(currencyDrawableResId, currencyCode, currencyName, formatCurrencyAmount(currencyValue))
     }
 
-    fun toCurrencyItemUIModelList(currencyList: List<Currency>?, selectedCurrencyCode: String, amount: String): List<CurrencyItemUIModel> {
+    fun toCurrencyItemUIModelList(currencyList: List<Currency>?, selectedCurrencyCode: String, amount: BigDecimal): List<CurrencyItemUIModel> {
         val list = currencyList?.toMutableList() ?: arrayListOf()
 
         val baseCurrency: Currency? = moveSelectedCurrencyToTop(list) { it.currencyCode == selectedCurrencyCode }

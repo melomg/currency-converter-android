@@ -51,3 +51,4 @@ lib/build/
 
 .externalNativeBuild
 .cxx
+/github.properties

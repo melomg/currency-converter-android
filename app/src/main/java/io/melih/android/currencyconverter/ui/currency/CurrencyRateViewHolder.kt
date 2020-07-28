@@ -15,20 +15,27 @@
  */
 package io.melih.android.currencyconverter.ui.currency
 
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import io.melih.android.currencyconverter.ui.PriceTextWatcher
 import kotlinx.android.synthetic.main.item_currency_rate.view.*
+import org.threeten.bp.Duration
+import org.threeten.bp.Instant
+import java.math.BigDecimal
+
+private const val SEARCH_DELAY_MS = 400L
 
 class CurrencyRateViewHolder(
     itemView: View,
-    listener: (String) -> Unit,
+    listener: (BigDecimal) -> Unit,
     private val itemClickListener: (CurrencyItemUIModel) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
 
     private val textChangedListener = object : TextWatcher {
+        private var searchRequestInstant: Instant? = null
+
         override fun afterTextChanged(s: Editable?) {
         }
 
@@ -36,9 +43,22 @@ class CurrencyRateViewHolder(
             // no-op
         }
 
+        @Suppress("UNNECESSARY_SAFE_CALL")
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            searchRequestInstant = Instant.now()
+
             if (adapterPosition != RecyclerView.NO_POSITION && adapterPosition == 0) {
-                listener(s.toString())
+                Handler().postDelayed({
+                    itemView?.currencyAmount?.priceValue?.let { searchWithDelay(it) }
+                }, SEARCH_DELAY_MS)
+            }
+        }
+
+        private fun searchWithDelay(priceValue: BigDecimal) {
+            val searchRequestPause = Instant.now()
+
+            if (Duration.between(searchRequestInstant, searchRequestPause).toMillis() >= SEARCH_DELAY_MS) {
+                listener(priceValue)
             }
         }
     }
@@ -65,7 +85,6 @@ class CurrencyRateViewHolder(
         if (position == 0) {
             currencyAmount.isEnabled = true
             currencyAmount.isFocusableInTouchMode = true
-            currencyAmount.setSelection(currencyAmount.length())
             currencyAmount.removeTextChangedListener(textChangedListener)
             currencyAmount.addTextChangedListener(textChangedListener)
         } else {
@@ -73,6 +92,5 @@ class CurrencyRateViewHolder(
             currencyAmount.isFocusableInTouchMode = false
         }
 
-        currencyAmount.addTextChangedListener(PriceTextWatcher(currencyAmount))
     }
 }
