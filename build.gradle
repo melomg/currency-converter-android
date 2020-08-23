@@ -24,6 +24,7 @@ buildscript {
             'stetho'                     : '1.5.1',
             'dagger'                     : '2.25.2',
             'room'                       : '2.2.1',
+            'melih_customviews'          : '1.0.2',
 
             'androidx_core_testing'      : '2.0.0',
             'androidx_test_core_ktx'     : '1.2.0',

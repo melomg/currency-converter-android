@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:showIn="@layout/item_original_currency_rate">
+
+	<ImageView
+		android:id="@+id/currencyIcon"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
+		android:layout_margin="@dimen/dp_16"
+		android:contentDescription="@null"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:src="@drawable/ic_united_kingdom"/>
+
+	<TextView
+		android:id="@+id/currencyCode"
+		style="@style/Currency.Code"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/dp_16"
+		app:layout_constraintStart_toEndOf="@+id/currencyIcon"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:text="GBP"/>
+
+	<TextView
+		android:id="@+id/currencyName"
+		style="@style/Currency.Name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toStartOf="@+id/currencyCode"
+		app:layout_constraintTop_toBottomOf="@+id/currencyCode"
+		tools:text="British Pound"/>
+
+</merge>

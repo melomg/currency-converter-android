@@ -23,60 +23,12 @@ import java.math.BigDecimal
 class CurrencyUtilsTest {
 
     @Test
-    fun convertCurrencyAndFormat_with_correct_amount() {
-        val baseCurrencyRate = BigDecimal(1)
-        val currencyRate = BigDecimal.valueOf(1.4)
-        val amount = "1,000"
-        val convertedCurrencyValue = currencyRate.convertCurrencyAndFormat(baseCurrencyRate, amount)
+    fun convertXCurrencyAmountToYCurrencyAmount() {
+        val euroCurrency = Currency("EUR", BigDecimal.ONE)
+        val cadCurrency = Currency("CAD", BigDecimal.valueOf(1.5309))
+        val cadCurrencyAmount = convertXCurrencyAmountToYCurrencyAmount(BigDecimal.valueOf(100), euroCurrency, cadCurrency)
 
-        assertEquals(convertedCurrencyValue, "1400.0")
-    }
-
-    @Test
-    fun convertCurrencyAndFormat_with_correct_amount_with_floating_point() {
-        val baseCurrencyRate = BigDecimal(1)
-        val currencyRate = BigDecimal.valueOf(1.4)
-        val amount = "1,000.25"
-        val convertedCurrencyValue = currencyRate.convertCurrencyAndFormat(baseCurrencyRate, amount)
-
-        assertEquals(convertedCurrencyValue, "1400.350")
-    }
-
-    @Test
-    fun convertCurrencyAndFormat_with_wrong_amount() {
-        val baseCurrencyRate = BigDecimal(1)
-        val currencyRate = BigDecimal.valueOf(1.4)
-        val amount = "1.00.0"
-        val convertedCurrencyValue = currencyRate.convertCurrencyAndFormat(baseCurrencyRate, amount)
-
-        assertEquals(convertedCurrencyValue, "0")
-    }
-
-    @Test
-    fun formatCurrencyAmount_with_correct_amount() {
-        val currencyAmount = "10500"
-        val formattedCurrencyAmount =
-            formatCurrencyAmount(currencyAmount)
-
-        assertEquals(formattedCurrencyAmount, "10,500")
-    }
-
-    @Test
-    fun formatCurrencyAmount_removes_unnecessary_fraction_digits() {
-        val currencyAmount = "10.500"
-        val formattedCurrencyAmount =
-            formatCurrencyAmount(currencyAmount)
-
-        assertEquals(formattedCurrencyAmount, "10.5")
-    }
-
-    @Test
-    fun formatCurrencyAmount_with_wrong_amount() {
-        val currencyAmount = "10.500.4"
-        val formattedCurrencyAmount =
-            formatCurrencyAmount(currencyAmount)
-
-        assertEquals(formattedCurrencyAmount, "")
+        assertEquals(cadCurrencyAmount.toDouble(), BigDecimal.valueOf(153.09).toDouble(), 0.01)
     }
 
     @Test

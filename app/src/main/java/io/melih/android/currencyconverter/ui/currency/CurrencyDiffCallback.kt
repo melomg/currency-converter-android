@@ -17,6 +17,7 @@ package io.melih.android.currencyconverter.ui.currency
 
 import android.os.Bundle
 import androidx.recyclerview.widget.DiffUtil
+import io.melih.android.currencyconverter.ui.currency.adapter.KEY_CURRENCY_VALUE
 
 object CurrencyDiffCallback : DiffUtil.ItemCallback<CurrencyItemUIModel>() {
     override fun areItemsTheSame(oldItem: CurrencyItemUIModel, newItem: CurrencyItemUIModel): Boolean =
@@ -28,7 +29,7 @@ object CurrencyDiffCallback : DiffUtil.ItemCallback<CurrencyItemUIModel>() {
     override fun getChangePayload(oldItem: CurrencyItemUIModel, newItem: CurrencyItemUIModel): Any? {
         val diffBundle = Bundle()
         if (newItem.currencyValue !== oldItem.currencyValue) {
-            diffBundle.putString(KEY_CURRENCY_VALUE, newItem.currencyValue)
+            diffBundle.putString(KEY_CURRENCY_VALUE, newItem.currencyValue.toPlainString())
         }
 
         return if (diffBundle.size() == 0) null else diffBundle

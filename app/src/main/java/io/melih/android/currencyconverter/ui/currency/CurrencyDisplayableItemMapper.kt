@@ -22,8 +22,7 @@ import androidx.annotation.ArrayRes
 import androidx.annotation.DrawableRes
 import io.melih.android.currencyconverter.R
 import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.util.convertCurrencyAndFormat
-import io.melih.android.currencyconverter.util.formatCurrencyAmount
+import io.melih.android.currencyconverter.util.convertXCurrencyAmountToYCurrencyAmount
 import io.melih.android.currencyconverter.util.moveSelectedCurrencyToTop
 import java.math.BigDecimal
 import javax.inject.Singleton
@@ -31,11 +30,23 @@ import javax.inject.Singleton
 @Singleton
 class CurrencyDisplayableItemMapper(private val applicationContext: Context) {
 
-    @SuppressLint("ResourceType")
-    fun toCurrencyItemUIModel(convertedCurrency: Currency, baseCurrencyRate: BigDecimal, amount: BigDecimal): CurrencyItemUIModel {
-        val countryResource = Country.fromCurrencyCode(convertedCurrency.currencyCode)
+    fun toCurrencyItemUIModelList(currencyList: List<Currency>?, selectedCurrencyCode: String, amount: BigDecimal): List<CurrencyItemUIModel> {
+        val list = currencyList?.toMutableList() ?: arrayListOf()
 
-        val countryTypedArray: TypedArray = applicationContext.resources.obtainTypedArray(countryResource.currencyCodeResId)
+        val xCurrency: Currency = moveSelectedCurrencyToTop(list) { it.currencyCode == selectedCurrencyCode } ?: return emptyList()
+        val xCurrencyAmount: BigDecimal = amount
+
+        return list.map { yCurrency ->
+            val yCurrencyAmount = convertXCurrencyAmountToYCurrencyAmount(xCurrencyAmount, xCurrency, yCurrency)
+            toCurrencyItemUIModel(yCurrency, yCurrencyAmount)
+        }
+    }
+
+    @SuppressLint("ResourceType")
+    private fun toCurrencyItemUIModel(yCurrency: Currency, yCurrencyAmount: BigDecimal): CurrencyItemUIModel {
+        val country = Country.fromCurrencyCode(yCurrency.currencyCode)
+
+        val countryTypedArray: TypedArray = applicationContext.resources.obtainTypedArray(country.currencyCodeResId)
 
         val currencyCode: String = countryTypedArray.getString(0) ?: throw IllegalStateException("country code is not valid")
 
@@ -45,26 +56,7 @@ class CurrencyDisplayableItemMapper(private val applicationContext: Context) {
 
         countryTypedArray.recycle()
 
-        val currencyValue = convertedCurrency.rate.convertCurrencyAndFormat(baseCurrencyRate, amount)
-        return CurrencyItemUIModel(currencyDrawableResId, currencyCode, currencyName, formatCurrencyAmount(currencyValue))
-    }
-
-    fun toCurrencyItemUIModelList(currencyList: List<Currency>?, selectedCurrencyCode: String, amount: BigDecimal): List<CurrencyItemUIModel> {
-        val list = currencyList?.toMutableList() ?: arrayListOf()
-
-        val baseCurrency: Currency? = moveSelectedCurrencyToTop(list) { it.currencyCode == selectedCurrencyCode }
-
-        return list.map {
-            toCurrencyItemUIModel(it, baseCurrency?.rate ?: BigDecimal.ONE, amount)
-        }
-    }
-
-    fun modifyList(listToModify: List<CurrencyItemUIModel>?, selectedCurrencyCode: String): List<CurrencyItemUIModel> {
-        val list = listToModify?.toMutableList() ?: arrayListOf()
-
-        moveSelectedCurrencyToTop(list) { it.currencyCode == selectedCurrencyCode }
-
-        return list
+        return CurrencyItemUIModel(currencyDrawableResId, currencyCode, currencyName, yCurrencyAmount)
     }
 }
 

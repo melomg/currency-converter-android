@@ -59,6 +59,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
 }
 
 def githubProperties = new Properties()
@@ -78,8 +82,7 @@ repositories {
 dependencies {
     implementation project(':model')
 
-    implementation 'melih.android.customviews:library:1.0.0'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
+    implementation "melih.android.customviews:library:${versions.melih_customviews}"
 
     // Support
     implementation "androidx.appcompat:appcompat:${versions.androidx_appcompat}"

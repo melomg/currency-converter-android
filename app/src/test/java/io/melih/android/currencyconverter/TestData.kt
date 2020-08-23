@@ -24,14 +24,12 @@ import java.math.BigDecimal
  */
 object TestData {
     val CURRENCY_ITEM_UI_MODEL_LIST: List<CurrencyItemUIModel> = mutableListOf(
-        CurrencyItemUIModel(R.drawable.ic_european_union, "EUR", "Euro", "1"),
-        CurrencyItemUIModel(R.drawable.ic_australia, "AUD", "Australian Dollar", "1.6133"),
-        CurrencyItemUIModel(R.drawable.ic_bulgaria, "BGN", "Bulgarian Lev", "1.9521"),
-        CurrencyItemUIModel(R.drawable.ic_brazil, "BRL", "Brazilian Real", "4.7827"),
-        CurrencyItemUIModel(R.drawable.ic_canada, "CAD", "Canadian Dollar", "1.5309")
+        CurrencyItemUIModel(R.drawable.ic_european_union, "EUR", "Euro", BigDecimal.ONE),
+        CurrencyItemUIModel(R.drawable.ic_australia, "AUD", "Australian Dollar", BigDecimal.valueOf(1.6133)),
+        CurrencyItemUIModel(R.drawable.ic_bulgaria, "BGN", "Bulgarian Lev", BigDecimal.valueOf(1.9521)),
+        CurrencyItemUIModel(R.drawable.ic_brazil, "BRL", "Brazilian Real", BigDecimal.valueOf(4.7827)),
+        CurrencyItemUIModel(R.drawable.ic_canada, "CAD", "Canadian Dollar", BigDecimal.valueOf(1.5309))
     )
-
-//    private val testDispatcher= TestCoroutineDispatcher()
 
     val CURRENCY_LIST: List<Currency> = mutableListOf(
         Currency("EUR", BigDecimal.valueOf(1)),

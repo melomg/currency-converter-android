@@ -22,10 +22,12 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.DaggerAppCompatActivity
 import io.melih.android.currencyconverter.R
 import io.melih.android.currencyconverter.datasource.local.CurrenciesNotFound
+import io.melih.android.currencyconverter.ui.currency.adapter.CurrencyRateListRecyclerAdapter
 import io.melih.android.currencyconverter.util.event.EventObserver
+import io.melih.android.currencyconverter.util.hideKeyboard
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_currency_rates.*
 import timber.log.Timber
-import javax.inject.Inject
 
 class CurrencyRatesActivity : DaggerAppCompatActivity() {
 
@@ -48,7 +50,7 @@ class CurrencyRatesActivity : DaggerAppCompatActivity() {
 
         setupRecyclerView()
 
-        viewModel.currencyListLiveData.observe(this, Observer {
+        viewModel.currencyItemUIModelList.observe(this, Observer {
             currencyAdapter.submitList(it ?: return@Observer)
         })
 
@@ -65,7 +67,7 @@ class CurrencyRatesActivity : DaggerAppCompatActivity() {
 
     private fun setupRecyclerView() {
         currencyAdapter = CurrencyRateListRecyclerAdapter(CurrencyDiffCallback, { amount ->
-            viewModel.amount = amount
+            viewModel.setAmount(amount)
         }, { currencyItemUIModel ->
             viewModel.setSelectedCurrencyCode(currencyItemUIModel.currencyCode)
         })
@@ -74,6 +76,11 @@ class CurrencyRatesActivity : DaggerAppCompatActivity() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = currencyAdapter
+
+            setOnTouchListener { _, _ ->
+                hideKeyboard()
+                return@setOnTouchListener false
+            }
         }
 
         currencyAdapter.registerAdapterDataObserver(adapterDataObserver)

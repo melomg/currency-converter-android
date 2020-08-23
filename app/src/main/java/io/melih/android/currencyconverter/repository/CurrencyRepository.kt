@@ -29,7 +29,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.concurrent.scheduleAtFixedRate
 
-private const val INTERVAL_IN_SECOND: Long = 1000L
+private const val INTERVAL_IN_SECOND: Long = 30L
 private val TAG: String = CurrencyRepository::class.java.simpleName
 
 @Singleton

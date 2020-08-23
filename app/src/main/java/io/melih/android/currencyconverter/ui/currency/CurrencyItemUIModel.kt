@@ -16,10 +16,11 @@
 package io.melih.android.currencyconverter.ui.currency
 
 import androidx.annotation.DrawableRes
+import java.math.BigDecimal
 
 data class CurrencyItemUIModel(
     @DrawableRes val currencyDrawableResId: Int,
     val currencyCode: String,
     val currencyName: String,
-    val currencyValue: String
+    val currencyValue: BigDecimal
 )

@@ -95,18 +95,18 @@ class CurrencyViewModelTest {
     @Test
     fun `setSelectedCurrencyCode triggers currencyListLiveData`() =
         mainCoroutineRule.testDispatcher.runBlockingTest {
-            `when`(currencyDisplayableItemMapper.modifyList(emptyList(), "GBP")).thenReturn(
-                CURRENCY_ITEM_UI_MODEL_LIST
-            )
+            /* `when`(currencyDisplayableItemMapper.modifyList(emptyList(), "GBP")).thenReturn(
+                 CURRENCY_ITEM_UI_MODEL_LIST
+             )*/
 
             mainCoroutineRule.testDispatcher.pauseDispatcher()
 
-            currencyViewModel.currencyListLiveData.observeForTesting {
+            currencyViewModel.currencyItemUIModelList.observeForTesting {
                 mainCoroutineRule.testDispatcher.resumeDispatcher()
 
                 currencyViewModel.setSelectedCurrencyCode("GBP")
 
-                val currencyList = currencyViewModel.currencyListLiveData.getOrAwaitValue()
+                val currencyList = currencyViewModel.currencyItemUIModelList.getOrAwaitValue()
 
                 assertThat(currencyList, not(nullValue()))
                 assertThat(currencyList, `is`(equalTo(CURRENCY_ITEM_UI_MODEL_LIST)))

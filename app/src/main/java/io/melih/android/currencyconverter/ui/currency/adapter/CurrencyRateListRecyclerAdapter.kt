@@ -13,43 +13,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.ui.currency
+package io.melih.android.currencyconverter.ui.currency.adapter
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import io.melih.android.currencyconverter.R
 import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_AMOUNT
+import io.melih.android.currencyconverter.ui.currency.CurrencyItemUIModel
+import io.melih.android.currencyconverter.util.inflate
 import java.math.BigDecimal
 
 internal const val KEY_CURRENCY_VALUE = "KEY_CURRENCY_VALUE"
+private const val VIEW_TYPE_ORIGINAL = 1
+private const val VIEW_TYPE_CONVERTED = 2
 
 class CurrencyRateListRecyclerAdapter(
     diffUtilItemCallback: DiffUtil.ItemCallback<CurrencyItemUIModel>,
     private val amountListener: (BigDecimal) -> Unit,
     private val itemClickListener: (CurrencyItemUIModel) -> Unit
-) : ListAdapter<CurrencyItemUIModel, CurrencyRateViewHolder>(diffUtilItemCallback) {
+) : ListAdapter<CurrencyItemUIModel, BaseConvertedCurrencyRateViewHolder>(diffUtilItemCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyRateViewHolder =
-        CurrencyRateViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_currency_rate, parent, false),
-            amountListener,
-            itemClickListener
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseConvertedCurrencyRateViewHolder =
+        if (viewType == VIEW_TYPE_ORIGINAL) {
+            OriginalCurrencyRateViewHolder(parent.inflate(R.layout.item_original_currency_rate), amountListener)
+        } else {
+            ConvertedCurrencyRateViewHolder(parent.inflate(R.layout.item_converted_currency_rate), itemClickListener)
+        }
 
-    override fun onBindViewHolder(viewHolder: CurrencyRateViewHolder, position: Int, payloads: MutableList<Any>) {
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) {
+            VIEW_TYPE_ORIGINAL
+        } else {
+            VIEW_TYPE_CONVERTED
+        }
+    }
+
+    override fun onBindViewHolder(viewHolder: BaseConvertedCurrencyRateViewHolder, position: Int, payloads: MutableList<Any>) {
         if (payloads.isEmpty()) {
             super.onBindViewHolder(viewHolder, position, payloads)
             return
         }
         val bundle = payloads[0] as Bundle
-        val currencyValue = bundle.getString(KEY_CURRENCY_VALUE) ?: DEFAULT_CURRENCY_AMOUNT.toPlainString()
+
+        val currencyValue = try {
+            bundle.getString(KEY_CURRENCY_VALUE)?.toBigDecimal() ?: DEFAULT_CURRENCY_AMOUNT
+        } catch (exception: NumberFormatException) {
+            DEFAULT_CURRENCY_AMOUNT
+        }
         viewHolder.bindTo(position, currencyValue)
     }
 
-    override fun onBindViewHolder(viewHolder: CurrencyRateViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: BaseConvertedCurrencyRateViewHolder, position: Int) {
         viewHolder.bindTo(position, getItem(position))
     }
 }
