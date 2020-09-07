@@ -23,5 +23,7 @@ interface CurrencyLocalDataSource {
 
     fun getAll(): LiveData<Result<List<Currency>>>
 
-    suspend fun insertAll(currencyList: List<Currency>)
+    suspend fun updateAllRates(currencyList: List<Currency>)
+
+    suspend fun updateAllOrdinals(currencyList: List<Currency>)
 }

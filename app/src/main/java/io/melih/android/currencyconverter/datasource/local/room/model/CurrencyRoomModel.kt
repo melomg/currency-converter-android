@@ -16,22 +16,26 @@
 package io.melih.android.currencyconverter.datasource.local.room.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import io.melih.android.currencyconverter.model.Currency
 
-@Entity(tableName = "currencies")
+@Entity(tableName = "currencies", indices = [Index(value = ["ordinal"])])
 data class CurrencyRoomModel(
     @PrimaryKey
     @SerializedName("currency_code")
     val currencyCode: String,
 
     @SerializedName("rate")
-    var rate: String
+    var rate: String,
+
+    @SerializedName("ordinal")
+    var ordinal: Int
 
 )
 
-fun CurrencyRoomModel.toCurrency(): Currency = Currency(currencyCode, rate.toBigDecimal())
+fun CurrencyRoomModel.toCurrency(): Currency = Currency(currencyCode, rate.toBigDecimal(), ordinal)
 
 fun List<CurrencyRoomModel>?.toCurrencyList(): List<Currency> {
     if (this == null) return emptyList()
@@ -39,7 +43,7 @@ fun List<CurrencyRoomModel>?.toCurrencyList(): List<Currency> {
     return map { it.toCurrency() }
 }
 
-fun Currency.toCurrencyRoomModel(): CurrencyRoomModel = CurrencyRoomModel(currencyCode, rate.toString())
+fun Currency.toCurrencyRoomModel(): CurrencyRoomModel = CurrencyRoomModel(currencyCode, rate.toString(), 1)
 
 fun List<Currency>?.toCurrencyRoomModelList(): List<CurrencyRoomModel> {
     if (this == null) return emptyList()

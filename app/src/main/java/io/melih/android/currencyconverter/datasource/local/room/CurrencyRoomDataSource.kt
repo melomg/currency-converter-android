@@ -20,7 +20,6 @@ import androidx.lifecycle.Transformations
 import io.melih.android.currencyconverter.datasource.local.CurrenciesNotFound
 import io.melih.android.currencyconverter.datasource.local.CurrencyLocalDataSource
 import io.melih.android.currencyconverter.datasource.local.room.model.toCurrencyList
-import io.melih.android.currencyconverter.datasource.local.room.model.toCurrencyRoomModelList
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.Result
 import javax.inject.Inject
@@ -33,7 +32,11 @@ class CurrencyRoomDataSource @Inject constructor(private val currenciesDao: Curr
         return@map Result.Success(currencyRoomModelList.toCurrencyList())
     }
 
-    override suspend fun insertAll(currencyList: List<Currency>) {
-        currenciesDao.insertAll(currencyList.toCurrencyRoomModelList())
+    override suspend fun updateAllRates(currencyList: List<Currency>) {
+        currenciesDao.updateAllRates(currencyList)
+    }
+
+    override suspend fun updateAllOrdinals(currencyList: List<Currency>) {
+        currenciesDao.updateAllOrdinals(currencyList)
     }
 }

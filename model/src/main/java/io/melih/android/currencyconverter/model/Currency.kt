@@ -17,4 +17,4 @@ package io.melih.android.currencyconverter.model
 
 import java.math.BigDecimal
 
-data class Currency(val currencyCode: String, val rate: BigDecimal)
+data class Currency(val currencyCode: String, val rate: BigDecimal, var ordinal: Int? = null)

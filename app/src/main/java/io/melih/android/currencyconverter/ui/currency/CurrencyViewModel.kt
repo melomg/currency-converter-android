@@ -46,18 +46,18 @@ class CurrencyViewModel @Inject constructor(
         get() = _errorLiveData
 
     @VisibleForTesting
-    var selectedCurrencyCode = MutableLiveData<String>()
+    var selectedCurrencyCode: String? = null
     private val amountLiveData = MutableLiveData<BigDecimal>()
     private val currencyListLiveData = MediatorLiveData<List<Currency>>()
 
     init {
-        setSelectedCurrencyCode(DEFAULT_CURRENCY_CODE)
+        changeCurrencyCode(DEFAULT_CURRENCY_CODE)
         setAmount(DEFAULT_CURRENCY_AMOUNT)
         _currencyItemUIModelList.addSource(currencyListLiveData) { list ->
+            val currencyCode = selectedCurrencyCode
             val amount = amountLiveData.value
-            val currencyCode = selectedCurrencyCode.value
-            if (amount != null && currencyCode != null && list != null) {
-                onCurrencyListChanged(amount, currencyCode, list)
+            if (currencyCode != null && amount != null && list != null) {
+                onCurrencyListChanged(amount, list)
             }
         }
         currencyListLiveData.addSource(currencyRepository.getLatestCurrencyRateList()) { result ->
@@ -66,18 +66,11 @@ class CurrencyViewModel @Inject constructor(
                 is Result.Success -> currencyListLiveData.value = result.data
             }
         }
-        currencyListLiveData.addSource(selectedCurrencyCode) { currencyCode ->
-            val amount = amountLiveData.value
-            val currencyList = currencyListLiveData.value
-            if (amount != null && currencyList != null) {
-                onCurrencyListChanged(amount, currencyCode, currencyList)
-            }
-        }
         currencyListLiveData.addSource(amountLiveData) { amount ->
-            val currencyCode = selectedCurrencyCode.value
+            val currencyCode = selectedCurrencyCode
             val currencyList = currencyListLiveData.value
             if (currencyCode != null && currencyList != null) {
-                onCurrencyListChanged(amount, currencyCode, currencyList)
+                onCurrencyListChanged(amount, currencyList)
             }
         }
     }
@@ -88,14 +81,19 @@ class CurrencyViewModel @Inject constructor(
     }
 
     @UiThread
-    fun setSelectedCurrencyCode(currencyCode: String) {
-        selectedCurrencyCode.value = currencyCode
+    fun changeCurrencyCode(currencyCode: String) {
+        selectedCurrencyCode = currencyCode
+        currencyListLiveData.value?.let { currencyList ->
+            viewModelScope.launch(defaultDispatcher) {
+                currencyRepository.updateAllOrdinals(currencyCode, currencyList)
+            }
+        }
     }
 
-    private fun onCurrencyListChanged(amount: BigDecimal, currencyCode: String, list: List<Currency>) =
+    private fun onCurrencyListChanged(amount: BigDecimal, list: List<Currency>) =
         viewModelScope.launch(defaultDispatcher) {
             _currencyItemUIModelList.postValue(
-                currencyDisplayableItemMapper.toCurrencyItemUIModelList(list, currencyCode, amount)
+                currencyDisplayableItemMapper.toCurrencyItemUIModelList(list, amount)
             )
         }
 

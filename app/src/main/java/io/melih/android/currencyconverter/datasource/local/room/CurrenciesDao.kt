@@ -16,20 +16,38 @@
 package io.melih.android.currencyconverter.datasource.local.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import io.melih.android.currencyconverter.datasource.local.room.model.CurrencyRoomModel
+import io.melih.android.currencyconverter.model.Currency
 
 @Suppress("unused")
 @Dao
 interface CurrenciesDao {
-    @Query("SELECT * FROM currencies")
+    @Query("SELECT * FROM currencies ORDER BY ordinal ASC")
     fun getAll(): LiveData<List<CurrencyRoomModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(currencies: List<CurrencyRoomModel>)
+
+    @Transaction
+    fun updateAllRates(currencies: List<Currency>) {
+        currencies.forEach { updateCurrencyRate(it.currencyCode, it.rate.toString()) }
+    }
+
+    @Query("UPDATE currencies SET rate = :rate WHERE currencyCode = :currencyCode")
+    fun updateCurrencyRate(currencyCode: String, rate: String)
+
+    @Transaction
+    fun updateAllOrdinals(currencies: List<Currency>) {
+        currencies.forEach { currency ->
+            currency.ordinal?.let { ordinal ->
+                updateOrdinal(currency.currencyCode, ordinal)
+            }
+        }
+    }
+
+    @Query("UPDATE currencies SET ordinal = :ordinal WHERE currencyCode = :currencyCode")
+    fun updateOrdinal(currencyCode: String, ordinal: Int)
 
     @Query("DELETE FROM currencies")
     fun deleteAll()

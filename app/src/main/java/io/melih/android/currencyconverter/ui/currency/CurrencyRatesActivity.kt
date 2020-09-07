@@ -69,7 +69,7 @@ class CurrencyRatesActivity : DaggerAppCompatActivity() {
         currencyAdapter = CurrencyRateListRecyclerAdapter(CurrencyDiffCallback, { amount ->
             viewModel.setAmount(amount)
         }, { currencyItemUIModel ->
-            viewModel.setSelectedCurrencyCode(currencyItemUIModel.currencyCode)
+            viewModel.changeCurrencyCode(currencyItemUIModel.currencyCode)
         })
 
         recyclerView.apply {

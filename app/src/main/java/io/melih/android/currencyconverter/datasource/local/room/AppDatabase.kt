@@ -19,7 +19,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import io.melih.android.currencyconverter.datasource.local.room.model.CurrencyRoomModel
 
-@Database(entities = [CurrencyRoomModel::class], version = 1, exportSchema = false)
+@Database(entities = [CurrencyRoomModel::class], version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun currenciesDao(): CurrenciesDao

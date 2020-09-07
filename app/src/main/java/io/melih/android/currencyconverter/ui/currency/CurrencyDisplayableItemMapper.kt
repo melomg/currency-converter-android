@@ -23,23 +23,23 @@ import androidx.annotation.DrawableRes
 import io.melih.android.currencyconverter.R
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.util.convertXCurrencyAmountToYCurrencyAmount
-import io.melih.android.currencyconverter.util.moveSelectedCurrencyToTop
 import java.math.BigDecimal
 import javax.inject.Singleton
 
 @Singleton
 class CurrencyDisplayableItemMapper(private val applicationContext: Context) {
 
-    fun toCurrencyItemUIModelList(currencyList: List<Currency>?, selectedCurrencyCode: String, amount: BigDecimal): List<CurrencyItemUIModel> {
+    fun toCurrencyItemUIModelList(currencyList: List<Currency>?, amount: BigDecimal): List<CurrencyItemUIModel> {
         val list = currencyList?.toMutableList() ?: arrayListOf()
+        return if (list.isNotEmpty()) {
+            val xCurrency: Currency = list[0]
+            val xCurrencyAmount: BigDecimal = amount
 
-        val xCurrency: Currency = moveSelectedCurrencyToTop(list) { it.currencyCode == selectedCurrencyCode } ?: return emptyList()
-        val xCurrencyAmount: BigDecimal = amount
-
-        return list.map { yCurrency ->
-            val yCurrencyAmount = convertXCurrencyAmountToYCurrencyAmount(xCurrencyAmount, xCurrency, yCurrency)
-            toCurrencyItemUIModel(yCurrency, yCurrencyAmount)
-        }
+            list.map { yCurrency ->
+                val yCurrencyAmount = convertXCurrencyAmountToYCurrencyAmount(xCurrencyAmount, xCurrency, yCurrency)
+                toCurrencyItemUIModel(yCurrency, yCurrencyAmount)
+            }
+        } else emptyList()
     }
 
     @SuppressLint("ResourceType")

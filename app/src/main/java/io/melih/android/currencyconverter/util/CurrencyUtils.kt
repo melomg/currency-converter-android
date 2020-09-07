@@ -30,4 +30,4 @@ fun <T> moveSelectedCurrencyToTop(list: MutableList<T>, predicate: (T) -> Boolea
 }
 
 fun convertXCurrencyAmountToYCurrencyAmount(xCurrencyAmount: BigDecimal, xCurrency: Currency, yCurrency: Currency): BigDecimal =
-    ((yCurrency.rate * xCurrencyAmount) / xCurrency.rate)
+    if (xCurrency.rate == BigDecimal.ZERO) BigDecimal.ZERO else ((yCurrency.rate * xCurrencyAmount) / xCurrency.rate)

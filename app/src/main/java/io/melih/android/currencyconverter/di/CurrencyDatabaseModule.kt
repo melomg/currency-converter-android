@@ -36,6 +36,7 @@ class CurrencyDatabaseModule {
     @Provides
     internal fun provideDatabase(context: Context): AppDatabase {
         return Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, APP_DB_NAME)
+            .createFromAsset("databases/$APP_DB_NAME")
             .fallbackToDestructiveMigration()
             .build()
     }

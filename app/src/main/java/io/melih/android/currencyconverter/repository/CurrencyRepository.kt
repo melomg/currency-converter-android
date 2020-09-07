@@ -20,6 +20,7 @@ import io.melih.android.currencyconverter.datasource.local.CurrencyLocalDataSour
 import io.melih.android.currencyconverter.datasource.remote.CurrencyRemoteDataSource
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.util.moveSelectedCurrencyToTop
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -50,14 +51,24 @@ class CurrencyRepository @Inject constructor(
                 Timber.d("timer is running ${System.currentTimeMillis()}")
                 GlobalScope.launch {
                     when (val result = remoteDataSource.getLatestCurrencyRateList()) {
-                        is Result.Success -> localDataSource.insertAll(result.data)
+                        is Result.Success -> localDataSource.updateAllRates(result.data)
                     }
                 }
             }
         }
     }
 
+    suspend fun updateAllOrdinals(selectedCurrencyCode: String, currencyList: List<Currency>) {
+        val list = currencyList.toMutableList()
+        moveSelectedCurrencyToTop(list) { it.currencyCode == selectedCurrencyCode }
+        list.forEachIndexed { index, currency ->
+            currency.ordinal = index
+        }
+        localDataSource.updateAllOrdinals(list)
+    }
+
     fun onClear() {
         timer?.cancel()
     }
+
 }
