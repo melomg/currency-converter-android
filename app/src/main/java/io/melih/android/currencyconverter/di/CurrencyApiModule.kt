@@ -19,6 +19,8 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import io.melih.android.currencyconverter.BuildConfig
 import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyApi
 import okhttp3.Interceptor
@@ -34,6 +36,7 @@ private const val TIMEOUT_SECOND: Long = 15
 private const val CURRENCY_API_TAG: String = "currency_api"
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class CurrencyApiModule {
 
     @Singleton

@@ -17,8 +17,8 @@ package io.melih.android.currencyconverter.ui.currency
 
 import androidx.annotation.UiThread
 import androidx.annotation.VisibleForTesting
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import io.melih.android.currencyconverter.di.ActivityScope
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_AMOUNT
 import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_CODE
@@ -30,8 +30,7 @@ import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import javax.inject.Inject
 
-@ActivityScope
-class CurrencyViewModel @Inject constructor(
+class CurrencyViewModel @ViewModelInject constructor(
     private val currencyDisplayableItemMapper: CurrencyDisplayableItemMapper,
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val currencyRepository: CurrencyRepository
