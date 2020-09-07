@@ -15,13 +15,15 @@
  */
 package io.melih.android.currencyconverter
 
+import io.melih.android.currencyconverter.util.TestCoroutineDispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
+import kotlin.coroutines.CoroutineContext
 
 /**
  *
@@ -43,18 +45,17 @@ import org.junit.runner.Description
  * ```
  */
 @ExperimentalCoroutinesApi
-class MainCoroutineRule : TestWatcher() {
-
-    val testDispatcher = TestCoroutineDispatcher()
+class MainCoroutineRule(val dispatcherProvider: TestCoroutineDispatcherProvider = TestCoroutineDispatcherProvider()) : TestWatcher(),
+    TestCoroutineScope by TestCoroutineScope(dispatcherProvider.testDispatcher), CoroutineContext by dispatcherProvider.testDispatcher {
 
     override fun starting(description: Description?) {
         super.starting(description)
-        Dispatchers.setMain(testDispatcher)
+        Dispatchers.setMain(dispatcherProvider.main)
     }
 
     override fun finished(description: Description?) {
         super.finished(description)
+        cleanupTestCoroutines()
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 }

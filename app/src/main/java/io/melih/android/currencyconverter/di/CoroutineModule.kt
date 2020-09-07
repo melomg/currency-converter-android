@@ -17,8 +17,7 @@ package io.melih.android.currencyconverter.di
 
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import io.melih.android.currencyconverter.util.CoroutineDispatcherProvider
 import javax.inject.Singleton
 
 @Module
@@ -26,5 +25,5 @@ class CoroutineModule {
 
     @Provides
     @Singleton
-    internal fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
+    internal fun provideDispatcher(): CoroutineDispatcherProvider = CoroutineDispatcherProvider()
 }

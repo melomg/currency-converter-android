@@ -24,8 +24,8 @@ import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_AMOUNT
 import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_CODE
 import io.melih.android.currencyconverter.model.Result
 import io.melih.android.currencyconverter.repository.CurrencyRepository
+import io.melih.android.currencyconverter.util.CoroutineDispatcherProvider
 import io.melih.android.currencyconverter.util.event.Event
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import javax.inject.Inject
@@ -33,7 +33,7 @@ import javax.inject.Inject
 @ActivityScope
 class CurrencyViewModel @Inject constructor(
     private val currencyDisplayableItemMapper: CurrencyDisplayableItemMapper,
-    private val defaultDispatcher: CoroutineDispatcher,
+    private val dispatcherProvider: CoroutineDispatcherProvider,
     private val currencyRepository: CurrencyRepository
 ) : ViewModel() {
 
@@ -84,14 +84,14 @@ class CurrencyViewModel @Inject constructor(
     fun changeCurrencyCode(currencyCode: String) {
         selectedCurrencyCode = currencyCode
         currencyListLiveData.value?.let { currencyList ->
-            viewModelScope.launch(defaultDispatcher) {
+            viewModelScope.launch(dispatcherProvider.io) {
                 currencyRepository.updateAllOrdinals(currencyCode, currencyList)
             }
         }
     }
 
     private fun onCurrencyListChanged(amount: BigDecimal, list: List<Currency>) =
-        viewModelScope.launch(defaultDispatcher) {
+        viewModelScope.launch(dispatcherProvider.io) {
             _currencyItemUIModelList.postValue(
                 currencyDisplayableItemMapper.toCurrencyItemUIModelList(list, amount)
             )

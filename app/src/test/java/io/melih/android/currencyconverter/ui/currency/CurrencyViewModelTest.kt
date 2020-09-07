@@ -66,7 +66,7 @@ class CurrencyViewModelTest {
         currencyLiveData.value = Result.Success(CURRENCY_LIST)
         currencyViewModel = CurrencyViewModel(
             currencyDisplayableItemMapper,
-            mainCoroutineRule.testDispatcher,
+            mainCoroutineRule.dispatcherProvider,
             currencyRepository
         )
     }
@@ -94,16 +94,15 @@ class CurrencyViewModelTest {
     }
 
     @Test
-    fun `changeCurrencyCode triggers updateAllOrdinals`() =
-        mainCoroutineRule.testDispatcher.runBlockingTest {
-            currencyViewModel.currencyItemUIModelList.getOrAwaitValue()
+    fun `changeCurrencyCode triggers updateAllOrdinals`() = mainCoroutineRule.runBlockingTest {
+        currencyViewModel.currencyItemUIModelList.getOrAwaitValue()
 
-            // WHEN
-            currencyViewModel.changeCurrencyCode("GBP")
+        // WHEN
+        currencyViewModel.changeCurrencyCode("GBP")
 
-            // THEN
-            verify(currencyRepository, times(1)).updateAllOrdinals(any(), any())
-        }
+        // THEN
+        verify(currencyRepository, times(1)).updateAllOrdinals(any(), any())
+    }
 
     @Test
     fun `clears repository`() {
