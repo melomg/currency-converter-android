@@ -16,23 +16,24 @@
 package io.melih.android.currencyconverter.ui.currency
 
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import io.melih.android.currencyconverter.R
 import io.melih.android.currencyconverter.datasource.local.CurrenciesNotFound
 import io.melih.android.currencyconverter.ui.currency.adapter.CurrencyRateListRecyclerAdapter
 import io.melih.android.currencyconverter.util.event.EventObserver
 import io.melih.android.currencyconverter.util.hideKeyboard
-import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_currency_rates.*
 import timber.log.Timber
 
-class CurrencyRatesActivity : DaggerAppCompatActivity() {
+@AndroidEntryPoint
+class CurrencyRatesActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModel: CurrencyViewModel
+    private val viewModel: CurrencyViewModel by viewModels()
 
     private lateinit var currencyAdapter: CurrencyRateListRecyclerAdapter
 

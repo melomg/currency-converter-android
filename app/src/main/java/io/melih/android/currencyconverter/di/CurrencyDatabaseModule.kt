@@ -19,6 +19,9 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import io.melih.android.currencyconverter.datasource.local.room.AppDatabase
 import io.melih.android.currencyconverter.datasource.local.room.CurrenciesDao
 import javax.inject.Singleton
@@ -26,6 +29,7 @@ import javax.inject.Singleton
 private const val APP_DB_NAME: String = "currency.db"
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class CurrencyDatabaseModule {
 
     @Singleton
@@ -34,8 +38,8 @@ class CurrencyDatabaseModule {
 
     @Singleton
     @Provides
-    internal fun provideDatabase(context: Context): AppDatabase {
-        return Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, APP_DB_NAME)
+    internal fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, APP_DB_NAME)
             .createFromAsset("databases/$APP_DB_NAME")
             .fallbackToDestructiveMigration()
             .build()

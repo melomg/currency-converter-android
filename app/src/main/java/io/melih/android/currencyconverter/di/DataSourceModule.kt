@@ -17,6 +17,8 @@ package io.melih.android.currencyconverter.di
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import io.melih.android.currencyconverter.datasource.local.CurrencyLocalDataSource
 import io.melih.android.currencyconverter.datasource.local.room.CurrenciesDao
 import io.melih.android.currencyconverter.datasource.local.room.CurrencyRoomDataSource
@@ -25,6 +27,7 @@ import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyApi
 import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyRetrofitDataSource
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class DataSourceModule {
 
     @Provides

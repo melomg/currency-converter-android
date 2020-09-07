@@ -15,18 +15,15 @@
  */
 package io.melih.android.currencyconverter.ui
 
+import android.app.Application
 import android.os.StrictMode
 import com.facebook.stetho.Stetho
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 import io.melih.android.currencyconverter.BuildConfig
-import io.melih.android.currencyconverter.di.DaggerAppComponent
 import timber.log.Timber
 
-class CurrencyConverterApplication : DaggerApplication() {
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
-        DaggerAppComponent.factory().create(applicationContext)
+@HiltAndroidApp
+class CurrencyConverterApplication : Application() {
 
     override fun onCreate() {
         setupStrictMode()

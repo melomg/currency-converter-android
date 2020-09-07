@@ -17,10 +17,13 @@ package io.melih.android.currencyconverter.di
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import io.melih.android.currencyconverter.util.CoroutineDispatcherProvider
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class CoroutineModule {
 
     @Provides

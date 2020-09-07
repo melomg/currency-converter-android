@@ -18,14 +18,16 @@ package io.melih.android.currencyconverter.ui.currency.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import io.melih.android.currencyconverter.ui.currency.CurrencyDisplayableItemMapper
-import javax.inject.Singleton
 
 @Module
+@InstallIn(ActivityRetainedComponent::class)
 class CurrencyMapperModule {
 
     @Provides
-    @Singleton
-    internal fun provideCurrencyDisplayableItemMapper(applicationContext: Context): CurrencyDisplayableItemMapper =
-        CurrencyDisplayableItemMapper(applicationContext)
+    internal fun provideCurrencyDisplayableItemMapper(@ApplicationContext context: Context): CurrencyDisplayableItemMapper =
+        CurrencyDisplayableItemMapper(context)
 }
