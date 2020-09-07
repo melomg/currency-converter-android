@@ -22,17 +22,17 @@ CurrencyConverter uses [ktlint](https://ktlint.github.io/) to check Kotlin codin
 
 ## Tech Stack:
 
-Demonstrates using Dagger 2.25+ in MVVM app with Android Architecture Components and Repository pattern.
+Demonstrates using Dagger 2.25+ in MVVM app with Clean Architecture.
 
 - MVVM
 
-- Repository
+- Repository Pattern
 
-- Dagger2
+- Dagger 2 & Hilt
 
 - Architecture Components (Room, LiveData, Coroutines,...)
-  
-- Retrofit 2.6.0+
+
+- Retrofit 2 & OkHttp 3 
 
 ## Versioning
 
