@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.di
+package io.melih.android.currencyconverter.remotedatasource.di
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -21,8 +21,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import io.melih.android.currencyconverter.BuildConfig
-import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyApi
+import io.melih.android.currencyconverter.remotedatasource.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,7 +40,7 @@ class CurrencyApiModule {
 
     @Singleton
     @Provides
-    internal fun provideApi(@Named(CURRENCY_API_TAG) retrofit: Retrofit): CurrencyApi = retrofit.create(CurrencyApi::class.java)
+    internal fun provideApi(@Named(CURRENCY_API_TAG) retrofit: Retrofit): io.melih.android.currencyconverter.remotedatasource.retrofit.CurrencyApi = retrofit.create(io.melih.android.currencyconverter.remotedatasource.retrofit.CurrencyApi::class.java)
 
     @Singleton
     @Provides

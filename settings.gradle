@@ -1,3 +1,4 @@
 include ':app', ':model'
 include ':localdatasource'
+include ':remotedatasource'
 rootProject.name = 'CurrencyConverter'

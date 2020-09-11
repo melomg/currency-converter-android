@@ -13,20 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.remote.retrofit.response
+package io.melih.android.currencyconverter.remotedatasource.retrofit
 
-import com.google.gson.annotations.SerializedName
-import java.math.BigDecimal
+import kotlinx.coroutines.Deferred
+import io.melih.android.currencyconverter.remotedatasource.retrofit.response.ResponseCurrencyRateList
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-data class ResponseCurrencyRateList(
+private const val DEFAULT_BASE_CURRENCY = "EUR"
 
-    @SerializedName("base")
-    val baseCurrency: String,
+interface CurrencyApi {
 
-    @SerializedName("date")
-    var date: String,
-
-    @SerializedName("rates")
-    val ratesMap: Map<String, BigDecimal>
-
-)
+    @GET("latest")
+    fun getLatestCurrencyRateListAsync(@Query("base") baseCurrency: String = DEFAULT_BASE_CURRENCY): Deferred<ResponseCurrencyRateList>
+}

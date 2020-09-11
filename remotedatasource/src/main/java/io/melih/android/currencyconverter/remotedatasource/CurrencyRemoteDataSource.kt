@@ -13,17 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package melih.android.localdatasource
+package io.melih.android.currencyconverter.remotedatasource
 
-import androidx.lifecycle.LiveData
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.Result
 
-interface CurrencyLocalDataSource {
+interface CurrencyRemoteDataSource {
 
-    fun getAll(): LiveData<Result<List<Currency>>>
-
-    suspend fun updateAllRates(currencyList: List<Currency>)
-
-    suspend fun updateAllOrdinals(currencyList: List<Currency>)
+    suspend fun getLatestCurrencyRateList(): Result<List<Currency>>
 }

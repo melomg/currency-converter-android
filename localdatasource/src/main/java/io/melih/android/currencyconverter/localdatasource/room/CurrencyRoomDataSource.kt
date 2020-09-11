@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package melih.android.localdatasource.room
+package io.melih.android.currencyconverter.localdatasource.room
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import melih.android.localdatasource.CurrencyLocalDataSource
-import melih.android.localdatasource.room.model.toCurrencyList
+import io.melih.android.currencyconverter.localdatasource.CurrencyLocalDataSource
+import io.melih.android.currencyconverter.localdatasource.room.model.toCurrencyList
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.Result
 import io.melih.android.currencyconverter.model.exceptions.CurrenciesNotFound

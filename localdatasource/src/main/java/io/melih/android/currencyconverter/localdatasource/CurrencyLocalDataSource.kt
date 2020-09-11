@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.remote.retrofit
+package io.melih.android.currencyconverter.localdatasource
 
-import io.melih.android.currencyconverter.datasource.remote.retrofit.response.ResponseCurrencyRateList
-import kotlinx.coroutines.Deferred
-import retrofit2.http.GET
-import retrofit2.http.Query
+import androidx.lifecycle.LiveData
+import io.melih.android.currencyconverter.model.Currency
+import io.melih.android.currencyconverter.model.Result
 
-private const val DEFAULT_BASE_CURRENCY = "EUR"
+interface CurrencyLocalDataSource {
 
-interface CurrencyApi {
+    fun getAll(): LiveData<Result<List<Currency>>>
 
-    @GET("latest")
-    fun getLatestCurrencyRateListAsync(@Query("base") baseCurrency: String = DEFAULT_BASE_CURRENCY): Deferred<ResponseCurrencyRateList>
+    suspend fun updateAllRates(currencyList: List<Currency>)
+
+    suspend fun updateAllOrdinals(currencyList: List<Currency>)
 }

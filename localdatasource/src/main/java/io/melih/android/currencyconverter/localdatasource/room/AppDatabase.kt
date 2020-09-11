@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.remote
+package io.melih.android.currencyconverter.localdatasource.room
 
-import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.model.Result
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import io.melih.android.currencyconverter.localdatasource.room.model.CurrencyRoomModel
 
-interface CurrencyRemoteDataSource {
+@Database(entities = [CurrencyRoomModel::class], version = 1, exportSchema = true)
+abstract class AppDatabase : RoomDatabase() {
 
-    suspend fun getLatestCurrencyRateList(): Result<List<Currency>>
+    abstract fun currenciesDao(): CurrenciesDao
 }

@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.remote.retrofit
+package io.melih.android.currencyconverter.remotedatasource.retrofit
 
-import io.melih.android.currencyconverter.datasource.remote.CurrencyRemoteDataSource
-import io.melih.android.currencyconverter.datasource.remote.safeApiCall
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.remotedatasource.CurrencyRemoteDataSource
+import io.melih.android.currencyconverter.remotedatasource.safeApiCall
 import java.io.IOException
 import java.math.BigDecimal
 import javax.inject.Inject
+import javax.inject.Singleton
 
 private const val UNKNOWN_ERROR = "Error fetching latest currency rates"
 
+@Singleton
 class CurrencyRetrofitDataSource @Inject constructor(private val api: CurrencyApi) : CurrencyRemoteDataSource {
 
     override suspend fun getLatestCurrencyRateList(): Result<List<Currency>> = safeApiCall(

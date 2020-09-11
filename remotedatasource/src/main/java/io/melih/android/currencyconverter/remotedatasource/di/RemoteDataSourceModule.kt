@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.di
+package io.melih.android.currencyconverter.remotedatasource.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import io.melih.android.currencyconverter.datasource.remote.CurrencyRemoteDataSource
-import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyApi
-import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyRetrofitDataSource
+import io.melih.android.currencyconverter.remotedatasource.CurrencyRemoteDataSource
+import io.melih.android.currencyconverter.remotedatasource.retrofit.CurrencyApi
+import io.melih.android.currencyconverter.remotedatasource.retrofit.CurrencyRetrofitDataSource
 
 @Module
 @InstallIn(ApplicationComponent::class)
-class DataSourceModule {
+class RemoteDataSourceModule {
 
     @Provides
     fun providesCurrencyRemoteDataSource(api: CurrencyApi): CurrencyRemoteDataSource = CurrencyRetrofitDataSource(api)

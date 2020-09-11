@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package melih.android.localdatasource.di
+package io.melih.android.currencyconverter.localdatasource.di
 
 import android.content.Context
 import androidx.room.Room
@@ -22,10 +22,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import melih.android.localdatasource.CurrencyLocalDataSource
-import melih.android.localdatasource.room.AppDatabase
-import melih.android.localdatasource.room.CurrenciesDao
-import melih.android.localdatasource.room.CurrencyRoomDataSource
+import io.melih.android.currencyconverter.localdatasource.room.AppDatabase
+import io.melih.android.currencyconverter.localdatasource.room.CurrenciesDao
 import javax.inject.Singleton
 
 private const val APP_DB_NAME: String = "currency.db"
@@ -33,10 +31,6 @@ private const val APP_DB_NAME: String = "currency.db"
 @Module
 @InstallIn(ApplicationComponent::class)
 class CurrencyDatabaseModule {
-
-    @Singleton
-    @Provides
-    fun providesCurrencyLocalDataSource(currenciesDao: CurrenciesDao): CurrencyLocalDataSource = CurrencyRoomDataSource(currenciesDao)
 
     @Singleton
     @Provides

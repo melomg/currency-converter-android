@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.remote
+package io.melih.android.currencyconverter.remotedatasource
 
 import io.melih.android.currencyconverter.model.Result
 import java.io.IOException

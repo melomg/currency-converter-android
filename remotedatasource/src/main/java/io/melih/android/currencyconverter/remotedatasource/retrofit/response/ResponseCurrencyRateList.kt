@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package melih.android.localdatasource.room
+package io.melih.android.currencyconverter.remotedatasource.retrofit.response
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import melih.android.localdatasource.room.model.CurrencyRoomModel
+import com.google.gson.annotations.SerializedName
+import java.math.BigDecimal
 
-@Database(entities = [CurrencyRoomModel::class], version = 1, exportSchema = true)
-abstract class AppDatabase : RoomDatabase() {
+data class ResponseCurrencyRateList(
 
-    abstract fun currenciesDao(): CurrenciesDao
-}
+    @SerializedName("base")
+    val baseCurrency: String,
+
+    @SerializedName("date")
+    var date: String,
+
+    @SerializedName("rates")
+    val ratesMap: Map<String, BigDecimal>
+
+)

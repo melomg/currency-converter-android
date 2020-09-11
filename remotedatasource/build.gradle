@@ -20,14 +20,10 @@ android {
         versionCode 1
         versionName "1.0.0"
 
+        buildConfigField("String", "CURRENCY_BASE_URL", '"https://api.exchangeratesapi.io/"')
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
     }
 
     buildTypes {
@@ -39,11 +35,17 @@ android {
 }
 
 dependencies {
-    // Room
-    implementation "androidx.room:room-runtime:${versions.room}"
-    kapt "androidx.room:room-compiler:${versions.room}"
-    testImplementation "androidx.room:room-testing:${versions.room}"
+    // Coroutines Retrofit Adapter
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${versions.coroutines_retrofit_adapter}"
 
+    // Network
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3_logging_interceptor}"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:${versions.stetho}"
+    implementation "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
 }
 
 kapt {
