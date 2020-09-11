@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.local.room
+package melih.android.localdatasource.room
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import io.melih.android.currencyconverter.datasource.local.CurrenciesNotFound
-import io.melih.android.currencyconverter.datasource.local.CurrencyLocalDataSource
-import io.melih.android.currencyconverter.datasource.local.room.model.toCurrencyList
+import melih.android.localdatasource.CurrencyLocalDataSource
+import melih.android.localdatasource.room.model.toCurrencyList
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.model.exceptions.CurrenciesNotFound
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CurrencyRoomDataSource @Inject constructor(private val currenciesDao: CurrenciesDao) : CurrencyLocalDataSource {
 
     override fun getAll(): LiveData<Result<List<Currency>>> = Transformations.map(currenciesDao.getAll()) { currencyRoomModelList ->

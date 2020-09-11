@@ -19,9 +19,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import io.melih.android.currencyconverter.datasource.local.CurrencyLocalDataSource
-import io.melih.android.currencyconverter.datasource.local.room.CurrenciesDao
-import io.melih.android.currencyconverter.datasource.local.room.CurrencyRoomDataSource
 import io.melih.android.currencyconverter.datasource.remote.CurrencyRemoteDataSource
 import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyApi
 import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyRetrofitDataSource
@@ -29,9 +26,6 @@ import io.melih.android.currencyconverter.datasource.remote.retrofit.CurrencyRet
 @Module
 @InstallIn(ApplicationComponent::class)
 class DataSourceModule {
-
-    @Provides
-    fun providesCurrencyLocalDataSource(currenciesDao: CurrenciesDao): CurrencyLocalDataSource = CurrencyRoomDataSource(currenciesDao)
 
     @Provides
     fun providesCurrencyRemoteDataSource(api: CurrencyApi): CurrencyRemoteDataSource = CurrencyRetrofitDataSource(api)

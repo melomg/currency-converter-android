@@ -88,7 +88,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':model')
+    implementation project(':localdatasource')
 
     implementation "melih.android.customviews:library:${versions.melih_customviews}"
 
@@ -107,8 +107,14 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:${versions.dagger_hilt_jetpack}"
     kapt "androidx.hilt:hilt-compiler:${versions.dagger_hilt_jetpack}"
 
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leak_canary}"
+
     // Stetho
     implementation "com.facebook.stetho:stetho:${versions.stetho}"
+
+    implementation "androidx.room:room-runtime:${versions.room}"
+    kapt "androidx.room:room-compiler:${versions.room}"
 
     // Coroutines Retrofit Adapter
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${versions.coroutines_retrofit_adapter}"
@@ -118,11 +124,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3_logging_interceptor}"
     implementation "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
-
-    // Room
-    implementation "androidx.room:room-runtime:${versions.room}"
-    kapt "androidx.room:room-compiler:${versions.room}"
-    testImplementation "androidx.room:room-testing:${versions.room}"
 
 }
 

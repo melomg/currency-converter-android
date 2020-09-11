@@ -24,6 +24,7 @@ buildscript {
             'timber'                     : '4.7.1',
             'leak_canary'                : '2.0-beta-3',
             'stetho'                     : '1.5.1',
+            'gson'                       : '2.8.6',
             'dagger'                     : '2.25.2',
             'dagger_hilt'                : '2.28-alpha',
             'dagger_hilt_jetpack'        : '1.0.0-alpha02',

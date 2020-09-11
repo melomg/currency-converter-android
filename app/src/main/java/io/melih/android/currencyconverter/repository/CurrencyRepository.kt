@@ -16,13 +16,13 @@
 package io.melih.android.currencyconverter.repository
 
 import androidx.lifecycle.LiveData
-import io.melih.android.currencyconverter.datasource.local.CurrencyLocalDataSource
 import io.melih.android.currencyconverter.datasource.remote.CurrencyRemoteDataSource
 import io.melih.android.currencyconverter.model.Currency
 import io.melih.android.currencyconverter.model.Result
 import io.melih.android.currencyconverter.util.moveSelectedCurrencyToTop
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import melih.android.localdatasource.CurrencyLocalDataSource
 import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit

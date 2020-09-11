@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.local.room.model
+package melih.android.localdatasource.room.model
 
 import androidx.room.Entity
 import androidx.room.Index

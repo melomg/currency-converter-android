@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.local.room
+package io.melih.android.currencyconverter.model.exceptions
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import io.melih.android.currencyconverter.datasource.local.room.model.CurrencyRoomModel
+import java.io.IOException
 
-@Database(entities = [CurrencyRoomModel::class], version = 1, exportSchema = true)
-abstract class AppDatabase : RoomDatabase() {
-
-    abstract fun currenciesDao(): CurrenciesDao
-}
+object CurrenciesNotFound : IOException()

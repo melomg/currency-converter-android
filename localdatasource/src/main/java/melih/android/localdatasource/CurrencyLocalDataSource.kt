@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.local
+package melih.android.localdatasource
 
 import androidx.lifecycle.LiveData
 import io.melih.android.currencyconverter.model.Currency

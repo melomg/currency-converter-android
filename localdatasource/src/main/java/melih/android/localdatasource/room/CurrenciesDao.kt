@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.datasource.local.room
+package melih.android.localdatasource.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import io.melih.android.currencyconverter.datasource.local.room.model.CurrencyRoomModel
+import melih.android.localdatasource.room.model.CurrencyRoomModel
 import io.melih.android.currencyconverter.model.Currency
 
 @Suppress("unused")

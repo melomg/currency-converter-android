@@ -1,13 +1,18 @@
 dependencies {
+    implementation project(':model')
+
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.core:core-ktx:${versions.androidx_core_ktx}"
 
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:${versions.ktx_lifecycle}"
+
     // Logger
     implementation "com.jakewharton.timber:timber:${versions.timber}"
 
-    // LeakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leak_canary}"
+    // Gson
+    implementation "com.google.code.gson:gson:${versions.gson}"
 
     // Dagger
     implementation "com.google.dagger:dagger:${versions.dagger}"
