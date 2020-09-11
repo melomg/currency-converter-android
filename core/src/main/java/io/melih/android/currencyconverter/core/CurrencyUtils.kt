@@ -13,8 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.model
+package io.melih.android.currencyconverter.core
 
+import io.melih.android.currencyconverter.core.model.Currency
 import java.math.BigDecimal
 
-data class Currency(val currencyCode: String, val rate: BigDecimal, var ordinal: Int? = null)
+fun <T> moveSelectedCurrencyToTop(list: MutableList<T>, predicate: (T) -> Boolean): T? {
+    val baseCurrency: T? = list.find(predicate)
+
+    baseCurrency?.apply {
+        list.remove(this)
+        list.add(0, this)
+    }
+
+    return baseCurrency
+}
+
+fun convertXCurrencyAmountToYCurrencyAmount(xCurrencyAmount: BigDecimal, xCurrency: Currency, yCurrency: Currency): BigDecimal =
+    if (xCurrency.rate == BigDecimal.ZERO) BigDecimal.ZERO else ((yCurrency.rate * xCurrencyAmount) / xCurrency.rate)

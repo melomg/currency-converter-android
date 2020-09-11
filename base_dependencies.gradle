@@ -1,0 +1,15 @@
+dependencies {
+    // Gson
+    implementation "com.google.code.gson:gson:${versions.gson}"
+
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:${versions.ktx_lifecycle}"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:${versions.dagger_hilt}"
+    kapt "com.google.dagger:hilt-android-compiler:${versions.dagger_hilt}"
+}

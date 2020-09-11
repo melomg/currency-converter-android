@@ -1,14 +1,6 @@
 apply plugin: 'com.android.library'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
-
-apply plugin: 'dagger.hilt.android.plugin'
-
-apply from: '../base_dependencies.gradle'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -22,12 +14,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
     }
 
     buildTypes {
@@ -39,15 +25,15 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
+    // Kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    api "androidx.core:core-ktx:${versions.androidx_core_ktx}"
 
-    // Room
-    implementation "androidx.room:room-runtime:${versions.room}"
-    kapt "androidx.room:room-compiler:${versions.room}"
-    testImplementation "androidx.room:room-testing:${versions.room}"
+    // Logger
+    api "com.jakewharton.timber:timber:${versions.timber}"
 
-}
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
 
-kapt {
-    correctErrorTypes = true
 }

@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import io.melih.android.currencyconverter.R
-import io.melih.android.currencyconverter.model.exceptions.CurrenciesNotFound
+import io.melih.android.currencyconverter.core.exceptions.CurrenciesNotFound
 import io.melih.android.currencyconverter.ui.currency.adapter.CurrencyRateListRecyclerAdapter
 import io.melih.android.currencyconverter.util.event.EventObserver
 import io.melih.android.currencyconverter.util.hideKeyboard

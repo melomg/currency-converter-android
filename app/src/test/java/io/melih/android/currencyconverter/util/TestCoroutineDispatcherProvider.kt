@@ -1,5 +1,6 @@
 package io.melih.android.currencyconverter.util
 
+import io.melih.android.currencyconverter.core.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher

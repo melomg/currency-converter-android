@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'dagger.hilt.android.plugin'
 
-apply from: '../core_dependencies.gradle'
+apply from: '../base_dependencies.gradle'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation project(':core')
+
     // Coroutines Retrofit Adapter
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${versions.coroutines_retrofit_adapter}"
 

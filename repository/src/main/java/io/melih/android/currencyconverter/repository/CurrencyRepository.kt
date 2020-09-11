@@ -17,10 +17,10 @@ package io.melih.android.currencyconverter.repository
 
 import androidx.lifecycle.LiveData
 import io.melih.android.currencyconverter.localdatasource.CurrencyLocalDataSource
-import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.remotedatasource.CurrencyRemoteDataSource
-import io.melih.android.currencyconverter.util.moveSelectedCurrencyToTop
+import io.melih.android.currencyconverter.core.moveSelectedCurrencyToTop
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber

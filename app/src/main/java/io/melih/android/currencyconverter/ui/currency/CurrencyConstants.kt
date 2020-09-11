@@ -1,4 +1,4 @@
-package io.melih.android.currencyconverter.model
+package io.melih.android.currencyconverter.ui.currency
 
 import java.math.BigDecimal
 

@@ -15,7 +15,7 @@
  */
 package io.melih.android.currencyconverter.remotedatasource
 
-import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.core.model.Result
 import java.io.IOException
 
 /**

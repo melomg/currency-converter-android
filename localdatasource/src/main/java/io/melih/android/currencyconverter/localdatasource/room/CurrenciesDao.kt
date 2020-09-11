@@ -18,7 +18,7 @@ package io.melih.android.currencyconverter.localdatasource.room
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import io.melih.android.currencyconverter.localdatasource.room.model.CurrencyRoomModel
-import io.melih.android.currencyconverter.model.Currency
+import io.melih.android.currencyconverter.core.model.Currency
 
 @Suppress("unused")
 @Dao

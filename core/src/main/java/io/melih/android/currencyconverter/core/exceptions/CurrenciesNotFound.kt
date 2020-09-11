@@ -13,23 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.model
+package io.melih.android.currencyconverter.core.exceptions
 
-/**
- * A generic class that holds a value with its loading status.
- * @param <T>
- */
-sealed class Result<out T : Any> {
+import java.io.IOException
 
-    data class Success<out T : Any>(val data: T) : Result<T>()
-    object Empty : Result<Nothing>()
-    data class Error(val exception: Exception) : Result<Nothing>()
-
-    override fun toString(): String {
-        return when (this) {
-            is Success<*> -> "Success[data=$data]"
-            is Empty -> "Empty"
-            is Error -> "Error[exception=$exception]"
-        }
-    }
-}
+object CurrenciesNotFound : IOException()

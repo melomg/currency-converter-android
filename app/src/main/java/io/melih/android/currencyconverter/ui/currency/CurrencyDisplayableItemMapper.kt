@@ -21,8 +21,8 @@ import android.content.res.TypedArray
 import androidx.annotation.ArrayRes
 import androidx.annotation.DrawableRes
 import io.melih.android.currencyconverter.R
-import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.util.convertXCurrencyAmountToYCurrencyAmount
+import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.core.convertXCurrencyAmountToYCurrencyAmount
 import java.math.BigDecimal
 import javax.inject.Singleton
 

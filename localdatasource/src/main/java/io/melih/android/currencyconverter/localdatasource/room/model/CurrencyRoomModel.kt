@@ -19,7 +19,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import io.melih.android.currencyconverter.model.Currency
+import io.melih.android.currencyconverter.core.model.Currency
 
 @Entity(tableName = "currencies", indices = [Index(value = ["ordinal"])])
 data class CurrencyRoomModel(

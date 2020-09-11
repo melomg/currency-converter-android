@@ -15,7 +15,7 @@
  */
 package io.melih.android.currencyconverter
 
-import io.melih.android.currencyconverter.model.Currency
+import io.melih.android.currencyconverter.core.model.Currency
 import io.melih.android.currencyconverter.ui.currency.CurrencyItemUIModel
 import java.math.BigDecimal
 

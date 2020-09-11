@@ -16,8 +16,8 @@
 package io.melih.android.currencyconverter.localdatasource
 
 import androidx.lifecycle.LiveData
-import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.core.model.Result
 
 interface CurrencyLocalDataSource {
 

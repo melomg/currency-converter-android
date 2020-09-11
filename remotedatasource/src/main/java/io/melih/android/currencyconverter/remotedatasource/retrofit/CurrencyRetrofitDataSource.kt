@@ -15,8 +15,8 @@
  */
 package io.melih.android.currencyconverter.remotedatasource.retrofit
 
-import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.remotedatasource.CurrencyRemoteDataSource
 import io.melih.android.currencyconverter.remotedatasource.safeApiCall
 import java.io.IOException

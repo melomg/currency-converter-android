@@ -19,16 +19,13 @@ import androidx.annotation.UiThread
 import androidx.annotation.VisibleForTesting
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_AMOUNT
-import io.melih.android.currencyconverter.model.DEFAULT_CURRENCY_CODE
-import io.melih.android.currencyconverter.model.Result
+import io.melih.android.currencyconverter.core.CoroutineDispatcherProvider
+import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.repository.CurrencyRepository
-import io.melih.android.currencyconverter.util.CoroutineDispatcherProvider
 import io.melih.android.currencyconverter.util.event.Event
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
-import javax.inject.Inject
 
 class CurrencyViewModel @ViewModelInject constructor(
     private val currencyDisplayableItemMapper: CurrencyDisplayableItemMapper,

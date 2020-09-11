@@ -23,9 +23,9 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.melih.android.currencyconverter.MainCoroutineRule
 import io.melih.android.currencyconverter.TestData.CURRENCY_LIST
+import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.getOrAwaitValue
-import io.melih.android.currencyconverter.model.Currency
-import io.melih.android.currencyconverter.model.Result
 import io.melih.android.currencyconverter.repository.CurrencyRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

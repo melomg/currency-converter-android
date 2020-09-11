@@ -15,7 +15,9 @@
  */
 package io.melih.android.currencyconverter.util
 
-import io.melih.android.currencyconverter.model.Currency
+import io.melih.android.currencyconverter.core.convertXCurrencyAmountToYCurrencyAmount
+import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.core.moveSelectedCurrencyToTop
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.math.BigDecimal
@@ -23,7 +25,7 @@ import java.math.BigDecimal
 class CurrencyUtilsTest {
 
     @Test
-    fun convertXCurrencyAmountToYCurrencyAmount() {
+    fun `convert X currency amount to Y currency amount`() {
         val euroCurrency = Currency("EUR", BigDecimal.ONE)
         val cadCurrency = Currency("CAD", BigDecimal.valueOf(1.5309))
         val cadCurrencyAmount = convertXCurrencyAmountToYCurrencyAmount(BigDecimal.valueOf(100), euroCurrency, cadCurrency)
@@ -32,7 +34,7 @@ class CurrencyUtilsTest {
     }
 
     @Test
-    fun moveSelectedCurrencyToTop() {
+    fun `move selected currency to top`() {
         val list = mutableListOf(
             Currency("EUR", BigDecimal.ONE),
             Currency("BGN", BigDecimal.valueOf(1.9521)),

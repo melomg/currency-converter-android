@@ -19,7 +19,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import io.melih.android.currencyconverter.util.CoroutineDispatcherProvider
+import io.melih.android.currencyconverter.core.CoroutineDispatcherProvider
 import javax.inject.Singleton
 
 @Module
