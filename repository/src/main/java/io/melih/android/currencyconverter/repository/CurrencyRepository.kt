@@ -15,20 +15,21 @@
  */
 package io.melih.android.currencyconverter.repository
 
-import androidx.lifecycle.LiveData
-import io.melih.android.currencyconverter.localdatasource.CurrencyLocalDataSource
+import io.melih.android.currencyconverter.core.CoroutineDispatcherProvider
 import io.melih.android.currencyconverter.core.model.Currency
 import io.melih.android.currencyconverter.core.model.Result
-import io.melih.android.currencyconverter.remotedatasource.CurrencyRemoteDataSource
 import io.melih.android.currencyconverter.core.moveSelectedCurrencyToTop
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import timber.log.Timber
-import java.util.*
+import io.melih.android.currencyconverter.localdatasource.CurrencyLocalDataSource
+import io.melih.android.currencyconverter.remotedatasource.CurrencyRemoteDataSource
+import java.util.Timer
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.concurrent.scheduleAtFixedRate
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 private const val INTERVAL_IN_SECOND: Long = 30L
 private val TAG: String = CurrencyRepository::class.java.simpleName
@@ -36,11 +37,12 @@ private val TAG: String = CurrencyRepository::class.java.simpleName
 @Singleton
 class CurrencyRepository @Inject constructor(
     private val localDataSource: CurrencyLocalDataSource,
-    private val remoteDataSource: CurrencyRemoteDataSource
+    private val remoteDataSource: CurrencyRemoteDataSource,
+    private val dispatcherProvider: CoroutineDispatcherProvider
 ) {
     private var timer: Timer? = null
 
-    fun getLatestCurrencyRateList(): LiveData<Result<List<Currency>>> {
+    fun getLatestCurrencyRateList(): Flow<Result<List<Currency>>> {
         fetchAndSaveCurrencyRateList()
         return localDataSource.getAll()
     }
@@ -49,7 +51,7 @@ class CurrencyRepository @Inject constructor(
         timer = Timer(TAG, false).apply {
             scheduleAtFixedRate(0, TimeUnit.SECONDS.toMillis(INTERVAL_IN_SECOND)) {
                 Timber.d("timer is running ${System.currentTimeMillis()}")
-                GlobalScope.launch {
+                GlobalScope.launch(dispatcherProvider.io) {
                     when (val result = remoteDataSource.getLatestCurrencyRateList()) {
                         is Result.Success -> localDataSource.updateAllRates(result.data)
                     }
@@ -70,5 +72,4 @@ class CurrencyRepository @Inject constructor(
     fun onClear() {
         timer?.cancel()
     }
-
 }

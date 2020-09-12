@@ -15,20 +15,20 @@
  */
 package io.melih.android.currencyconverter.localdatasource.room
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import io.melih.android.currencyconverter.localdatasource.CurrencyLocalDataSource
-import io.melih.android.currencyconverter.localdatasource.room.model.toCurrencyList
+import io.melih.android.currencyconverter.core.exceptions.CurrenciesNotFound
 import io.melih.android.currencyconverter.core.model.Currency
 import io.melih.android.currencyconverter.core.model.Result
-import io.melih.android.currencyconverter.core.exceptions.CurrenciesNotFound
+import io.melih.android.currencyconverter.localdatasource.CurrencyLocalDataSource
+import io.melih.android.currencyconverter.localdatasource.room.model.toCurrencyList
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 @Singleton
 class CurrencyRoomDataSource @Inject constructor(private val currenciesDao: CurrenciesDao) : CurrencyLocalDataSource {
 
-    override fun getAll(): LiveData<Result<List<Currency>>> = Transformations.map(currenciesDao.getAll()) { currencyRoomModelList ->
+    override fun getAll(): Flow<Result<List<Currency>>> = currenciesDao.getAll().map { currencyRoomModelList ->
         if (currencyRoomModelList.isNullOrEmpty()) return@map Result.Error(CurrenciesNotFound)
 
         return@map Result.Success(currencyRoomModelList.toCurrencyList())

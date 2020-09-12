@@ -18,9 +18,9 @@ package io.melih.android.currencyconverter.ui.currency.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import io.melih.android.currencyconverter.ui.currency.CurrencyItemUIModel
+import java.math.BigDecimal
 import kotlinx.android.synthetic.main.item_converted_currency_rate.view.*
 import melih.android.customviews.decimalFormat
-import java.math.BigDecimal
 
 class ConvertedCurrencyRateViewHolder(
     itemView: View,
@@ -40,5 +40,4 @@ class ConvertedCurrencyRateViewHolder(
     override fun View.bindCurrencyAmount(position: Int, currencyValue: BigDecimal) {
         currencyAmountTextView.text = decimalFormat.format(currencyValue.toDouble())
     }
-
 }
