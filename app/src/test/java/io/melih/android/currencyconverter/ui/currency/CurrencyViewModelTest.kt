@@ -28,6 +28,7 @@ import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.getOrAwaitValue
 import io.melih.android.currencyconverter.repository.CurrencyRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.CoreMatchers.nullValue
@@ -62,12 +63,11 @@ class CurrencyViewModelTest {
     @Before
     fun setupViewModel() {
         MockitoAnnotations.initMocks(this)
-        whenever(currencyRepository.getLatestCurrencyRateList()).thenReturn(currencyLiveData)
-        currencyLiveData.value = Result.Success(CURRENCY_LIST)
+        whenever(currencyRepository.getLatestCurrencyRateList()).thenReturn(flowOf(Result.Success(CURRENCY_LIST)))
         currencyViewModel = CurrencyViewModel(
+            currencyRepository,
             currencyDisplayableItemMapper,
-            mainCoroutineRule.dispatcherProvider,
-            currencyRepository
+            mainCoroutineRule.dispatcherProvider
         )
     }
 

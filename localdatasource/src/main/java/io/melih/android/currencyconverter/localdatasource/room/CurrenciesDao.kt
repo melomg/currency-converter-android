@@ -15,16 +15,20 @@
  */
 package io.melih.android.currencyconverter.localdatasource.room
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
-import io.melih.android.currencyconverter.localdatasource.room.model.CurrencyRoomModel
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
 import io.melih.android.currencyconverter.core.model.Currency
+import io.melih.android.currencyconverter.localdatasource.room.model.CurrencyRoomModel
+import kotlinx.coroutines.flow.Flow
 
 @Suppress("unused")
 @Dao
 interface CurrenciesDao {
     @Query("SELECT * FROM currencies ORDER BY ordinal ASC")
-    fun getAll(): LiveData<List<CurrencyRoomModel>>
+    fun getAll(): Flow<List<CurrencyRoomModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(currencies: List<CurrencyRoomModel>)

@@ -18,19 +18,24 @@ package io.melih.android.currencyconverter.ui.currency
 import androidx.annotation.UiThread
 import androidx.annotation.VisibleForTesting
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.melih.android.currencyconverter.core.CoroutineDispatcherProvider
 import io.melih.android.currencyconverter.core.model.Currency
 import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.repository.CurrencyRepository
 import io.melih.android.currencyconverter.util.event.Event
-import kotlinx.coroutines.launch
 import java.math.BigDecimal
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class CurrencyViewModel @ViewModelInject constructor(
+    private val currencyRepository: CurrencyRepository,
     private val currencyDisplayableItemMapper: CurrencyDisplayableItemMapper,
-    private val dispatcherProvider: CoroutineDispatcherProvider,
-    private val currencyRepository: CurrencyRepository
+    private val dispatcherProvider: CoroutineDispatcherProvider
 ) : ViewModel() {
 
     private val _currencyItemUIModelList = MediatorLiveData<List<CurrencyItemUIModel>>()
@@ -56,17 +61,21 @@ class CurrencyViewModel @ViewModelInject constructor(
                 onCurrencyListChanged(amount, list)
             }
         }
-        currencyListLiveData.addSource(currencyRepository.getLatestCurrencyRateList()) { result ->
-            when (result) {
-                is Result.Error -> _errorLiveData.value = Event(result.exception)
-                is Result.Success -> currencyListLiveData.value = result.data
-            }
-        }
+
         currencyListLiveData.addSource(amountLiveData) { amount ->
             val currencyCode = selectedCurrencyCode
             val currencyList = currencyListLiveData.value
             if (currencyCode != null && currencyList != null) {
                 onCurrencyListChanged(amount, currencyList)
+            }
+        }
+
+        viewModelScope.launch(dispatcherProvider.io) {
+            currencyRepository.getLatestCurrencyRateList().collect { result ->
+                when (result) {
+                    is Result.Error -> _errorLiveData.postValue(Event(result.exception))
+                    is Result.Success -> currencyListLiveData.postValue(result.data)
+                }
             }
         }
     }

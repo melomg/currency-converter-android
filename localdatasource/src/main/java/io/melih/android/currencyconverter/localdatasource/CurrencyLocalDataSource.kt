@@ -15,13 +15,13 @@
  */
 package io.melih.android.currencyconverter.localdatasource
 
-import androidx.lifecycle.LiveData
 import io.melih.android.currencyconverter.core.model.Currency
 import io.melih.android.currencyconverter.core.model.Result
+import kotlinx.coroutines.flow.Flow
 
 interface CurrencyLocalDataSource {
 
-    fun getAll(): LiveData<Result<List<Currency>>>
+    fun getAll(): Flow<Result<List<Currency>>>
 
     suspend fun updateAllRates(currencyList: List<Currency>)
 
