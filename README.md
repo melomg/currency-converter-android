@@ -2,7 +2,7 @@
 
 ## Android Studio IDE setup
 
-CurrencyConverter uses Android Studio version 3.5.1
+CurrencyConverter uses Android Studio version 4.0.1
 
 CurrencyConverter uses [ktlint](https://ktlint.github.io/) to check Kotlin coding styles.
 
