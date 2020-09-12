@@ -13,13 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter.core
+package io.melih.android.currencyconverter
 
+import io.melih.android.currencyconverter.core.CoroutineDispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 
-open class CoroutineDispatcherProvider {
-    open val main: CoroutineDispatcher by lazy { Dispatchers.Main }
-    open val io: CoroutineDispatcher by lazy { Dispatchers.IO }
-    open val default: CoroutineDispatcher by lazy { Dispatchers.Default }
+@ExperimentalCoroutinesApi
+class TestCoroutineDispatcherProvider : CoroutineDispatcherProvider() {
+    val testDispatcher = TestCoroutineDispatcher()
+
+    override val main: CoroutineDispatcher = testDispatcher
+
+    override val io: CoroutineDispatcher = testDispatcher
+
+    override val default: CoroutineDispatcher = testDispatcher
 }

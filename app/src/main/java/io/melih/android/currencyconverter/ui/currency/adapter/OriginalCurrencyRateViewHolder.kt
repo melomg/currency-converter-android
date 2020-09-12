@@ -20,8 +20,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_original_currency_rate.view.*
 import java.math.BigDecimal
+import kotlinx.android.synthetic.main.item_original_currency_rate.view.*
 
 private const val SEARCH_DELAY_MS = 400L
 

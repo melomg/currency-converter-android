@@ -15,8 +15,8 @@
  */
 package io.melih.android.currencyconverter.remotedatasource.retrofit
 
-import kotlinx.coroutines.Deferred
 import io.melih.android.currencyconverter.remotedatasource.retrofit.response.ResponseCurrencyRateList
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -18,9 +18,9 @@ package io.melih.android.currencyconverter.util
 import io.melih.android.currencyconverter.core.convertXCurrencyAmountToYCurrencyAmount
 import io.melih.android.currencyconverter.core.model.Currency
 import io.melih.android.currencyconverter.core.moveSelectedCurrencyToTop
+import java.math.BigDecimal
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.math.BigDecimal
 
 class CurrencyUtilsTest {
 

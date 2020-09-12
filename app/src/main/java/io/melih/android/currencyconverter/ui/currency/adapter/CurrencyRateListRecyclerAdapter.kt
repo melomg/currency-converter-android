@@ -20,8 +20,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import io.melih.android.currencyconverter.R
-import io.melih.android.currencyconverter.ui.currency.DEFAULT_CURRENCY_AMOUNT
 import io.melih.android.currencyconverter.ui.currency.CurrencyItemUIModel
+import io.melih.android.currencyconverter.ui.currency.DEFAULT_CURRENCY_AMOUNT
 import io.melih.android.currencyconverter.util.inflate
 import java.math.BigDecimal
 
