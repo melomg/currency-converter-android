@@ -30,7 +30,9 @@ Demonstrates using Dagger 2.25+ in MVVM app with Clean Architecture.
 
 - Dagger 2 & Hilt
 
-- Architecture Components (Room, LiveData, Coroutines,...)
+- Coroutines, Flow
+
+- Architecture Components (Room, LiveData,...)
 
 - Retrofit 2 & OkHttp 3 
 
