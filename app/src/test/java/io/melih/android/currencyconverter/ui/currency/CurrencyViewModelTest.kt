@@ -16,14 +16,12 @@
 package io.melih.android.currencyconverter.ui.currency
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.melih.android.currencyconverter.MainCoroutineRule
 import io.melih.android.currencyconverter.TestData.CURRENCY_LIST
-import io.melih.android.currencyconverter.core.model.Currency
 import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.getOrAwaitValue
 import io.melih.android.currencyconverter.repository.CurrencyRepository
@@ -57,8 +55,6 @@ class CurrencyViewModelTest {
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
-
-    private var currencyLiveData = MutableLiveData<Result<List<Currency>>>()
 
     @Before
     fun setupViewModel() {

@@ -39,17 +39,14 @@ class CurrencyViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _currencyItemUIModelList = MediatorLiveData<List<CurrencyItemUIModel>>()
-    val currencyItemUIModelList: LiveData<List<CurrencyItemUIModel>>
-        get() = _currencyItemUIModelList
-
     private val _errorLiveData = MutableLiveData<Event<Exception>>()
-    val errorLiveData: LiveData<Event<Exception>>
-        get() = _errorLiveData
-
-    @VisibleForTesting
-    var selectedCurrencyCode: String? = null
     private val amountLiveData = MutableLiveData<BigDecimal>()
     private val currencyListLiveData = MediatorLiveData<List<Currency>>()
+    @VisibleForTesting
+    var selectedCurrencyCode: String? = null
+
+    val currencyItemUIModelList: LiveData<List<CurrencyItemUIModel>> by this::_currencyItemUIModelList
+    val errorLiveData: LiveData<Event<Exception>> by this::_errorLiveData
 
     init {
         changeCurrencyCode(DEFAULT_CURRENCY_CODE)
