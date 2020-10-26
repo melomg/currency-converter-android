@@ -18,8 +18,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Run unit tests
+      - name: Run spotless check and unit tests
         env:
-          GPR_USER: ${{ secrets.GPR_USR }}
-          GPR_API_KEY: ${{ secrets.GPR_KEY }}
+          GPR_USER: ${{ secrets.GPR_USER }}
+          GPR_API_KEY: ${{ secrets.GPR_API_KEY }}
         run: bash ./gradlew clean spotlessCheck assembleProdDebugAndroidTest testProdDebugUnitTest --stacktrace
