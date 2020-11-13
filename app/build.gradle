@@ -120,6 +120,8 @@ dependencies {
     androidTestImplementation(project(":unittestshared")) {
         // conflicts with mockito due to direct inclusion of byte buddy
         exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+        exclude group: "junit", module: "junit"
+        exclude group: "org.hamcrest"
     }
 
 }
