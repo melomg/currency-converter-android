@@ -1,4 +1,6 @@
 dependencies {
+    implementation project(':core')
+
     // Gson
     implementation "com.google.code.gson:gson:${versions.gson}"
 

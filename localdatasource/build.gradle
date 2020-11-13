@@ -39,8 +39,6 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
-
     // Room
     implementation "androidx.room:room-runtime:${versions.room}"
     kapt "androidx.room:room-compiler:${versions.room}"

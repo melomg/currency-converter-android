@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.melih.android.currencyconverter
+package io.melih.android.currencyconverter.unittestshared
 
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers

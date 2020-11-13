@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+apply from: '../base_dependencies.gradle'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}"
+
+    api "junit:junit:${versions.junit}"
+    api "org.hamcrest:hamcrest-all:${versions.hamcrest}"
+    api "org.mockito:mockito-core:${versions.mockito}"
+    api "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitokotlin2}"
+}
+
+kapt {
+    correctErrorTypes = true
+}

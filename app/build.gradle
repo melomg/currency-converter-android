@@ -84,7 +84,6 @@ repositories {
 }
 
 dependencies {
-    implementation project(':core')
     implementation project(':repository')
     implementation project(':localdatasource')
     implementation project(':remotedatasource')
@@ -118,6 +117,11 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3_logging_interceptor}"
     implementation "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
 
+    androidTestImplementation(project(":unittestshared")) {
+        // conflicts with mockito due to direct inclusion of byte buddy
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+
 }
 
 androidExtensions {
@@ -126,4 +130,8 @@ androidExtensions {
 
 kapt {
     correctErrorTypes = true
+}
+
+afterEvaluate {
+    tasks.testProdDebugUnitTest.dependsOn(':repository:test')
 }

@@ -1,21 +1,15 @@
 dependencies {
     // Architecture Components
     testImplementation "androidx.arch.core:core-testing:${versions.androidx_core_testing}"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}"
-
-    // Dependencies for local unit tests
-    testImplementation "junit:junit:${versions.junit}"
-    testImplementation "org.hamcrest:hamcrest-all:${versions.hamcrest}"
-    testImplementation "org.mockito:mockito-core:${versions.mockito}"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitokotlin2}"
 
     // AndroidX Test - JVM testing
     testImplementation "androidx.test.ext:junit:${versions.androidx_junit}"
     testImplementation "androidx.test:core-ktx:${versions.androidx_test_core_ktx}"
     androidTestImplementation "androidx.test:rules:${versions.androidx_test_rules}"
     androidTestImplementation "androidx.test:runner:${versions.androidx_test_rules}"
-
     androidTestImplementation "androidx.test.espresso:espresso-core:${versions.test_espresso_core}"
+
+    // Dependencies for local unit tests
+    testImplementation project(":unittestshared")
 
 }

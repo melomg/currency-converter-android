@@ -33,7 +33,8 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
     implementation project(':localdatasource')
     implementation project(':remotedatasource')
+    implementation project(':remotedatasource')
+    testImplementation project(":unittestshared")
 }
