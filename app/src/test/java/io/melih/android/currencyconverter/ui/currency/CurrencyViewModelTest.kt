@@ -20,11 +20,11 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import io.melih.android.currencyconverter.MainCoroutineRule
-import io.melih.android.currencyconverter.TestData.CURRENCY_LIST
 import io.melih.android.currencyconverter.core.model.Result
 import io.melih.android.currencyconverter.getOrAwaitValue
 import io.melih.android.currencyconverter.repository.CurrencyRepository
+import io.melih.android.currencyconverter.unittestshared.CURRENCY_LIST
+import io.melih.android.currencyconverter.unittestshared.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest

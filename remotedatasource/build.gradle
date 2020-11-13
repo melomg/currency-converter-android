@@ -35,8 +35,6 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
-
     // Coroutines Retrofit Adapter
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${versions.coroutines_retrofit_adapter}"
 
