@@ -22,13 +22,11 @@ package io.melih.android.currencyconverter.core.model
 sealed class Result<out T : Any> {
 
     data class Success<out T : Any>(val data: T) : Result<T>()
-    object Empty : Result<Nothing>()
     data class Error(val exception: Exception) : Result<Nothing>()
 
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
-            is Empty -> "Empty"
             is Error -> "Error[exception=$exception]"
         }
     }
