@@ -21,7 +21,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface CurrencyLocalDataSource {
 
-    fun getAll(): Flow<Result<List<Currency>>>
+    fun getAllAsFlow(): Flow<Result<List<Currency>>>
+
+    suspend fun getAll(): List<Currency>
 
     suspend fun updateAllRates(currencyList: List<Currency>)
 

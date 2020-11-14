@@ -97,7 +97,7 @@ class CurrencyViewModelTest {
         currencyViewModel.changeCurrencyCode("GBP")
 
         // THEN
-        verify(currencyRepository, times(1)).updateAllOrdinals(any(), any())
+        verify(currencyRepository, times(1)).updateAllOrdinals(any())
     }
 
     @Test

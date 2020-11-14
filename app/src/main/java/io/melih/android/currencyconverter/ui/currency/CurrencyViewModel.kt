@@ -42,6 +42,7 @@ class CurrencyViewModel @ViewModelInject constructor(
     private val _errorLiveData = MutableLiveData<Event<Exception>>()
     private val amountLiveData = MutableLiveData<BigDecimal>()
     private val currencyListLiveData = MediatorLiveData<List<Currency>>()
+
     @VisibleForTesting
     var selectedCurrencyCode: String? = null
 
@@ -85,10 +86,9 @@ class CurrencyViewModel @ViewModelInject constructor(
     @UiThread
     fun changeCurrencyCode(currencyCode: String) {
         selectedCurrencyCode = currencyCode
-        currencyListLiveData.value?.let { currencyList ->
-            viewModelScope.launch(dispatcherProvider.io) {
-                currencyRepository.updateAllOrdinals(currencyCode, currencyList)
-            }
+
+        viewModelScope.launch(dispatcherProvider.io) {
+            currencyRepository.updateAllOrdinals(currencyCode)
         }
     }
 

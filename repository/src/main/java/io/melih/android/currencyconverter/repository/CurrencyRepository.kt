@@ -42,15 +42,14 @@ class CurrencyRepository @Inject constructor(
 ) {
     private var timer: Timer? = null
 
-    fun getLatestCurrencyRateList(): Flow<Result<List<Currency>>> {
+    init {
         fetchAndSaveCurrencyRateList()
-        return localDataSource.getAll()
     }
 
     private fun fetchAndSaveCurrencyRateList() {
         timer = Timer(TAG, false).apply {
             scheduleAtFixedRate(0, TimeUnit.SECONDS.toMillis(INTERVAL_IN_SECOND)) {
-                Timber.d("timer is running ${System.currentTimeMillis()}")
+                Timber.d("Timer is running ${System.currentTimeMillis()}")
                 GlobalScope.launch(dispatcherProvider.io) {
                     when (val result = remoteDataSource.getLatestCurrencyRateList()) {
                         is Result.Success -> localDataSource.updateAllRates(result.data)
@@ -60,8 +59,10 @@ class CurrencyRepository @Inject constructor(
         }
     }
 
-    suspend fun updateAllOrdinals(selectedCurrencyCode: String, currencyList: List<Currency>) {
-        val list = currencyList.toMutableList()
+    fun getLatestCurrencyRateList(): Flow<Result<List<Currency>>> = localDataSource.getAllAsFlow()
+
+    suspend fun updateAllOrdinals(selectedCurrencyCode: String) {
+        val list = localDataSource.getAll().toMutableList()
         moveSelectedCurrencyToTop(list) { it.currencyCode == selectedCurrencyCode }
         list.forEachIndexed { index, currency ->
             currency.ordinal = index

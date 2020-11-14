@@ -28,7 +28,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CurrenciesDao {
     @Query("SELECT * FROM currencies ORDER BY ordinal ASC")
-    fun getAll(): Flow<List<CurrencyRoomModel>>
+    fun getAllAsFlow(): Flow<List<CurrencyRoomModel>>
+
+    @Query("SELECT * FROM currencies ORDER BY ordinal ASC")
+    fun getAll(): List<CurrencyRoomModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(currencies: List<CurrencyRoomModel>)

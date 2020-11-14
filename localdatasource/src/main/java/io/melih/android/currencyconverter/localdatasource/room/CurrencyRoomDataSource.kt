@@ -28,11 +28,13 @@ import kotlinx.coroutines.flow.map
 @Singleton
 class CurrencyRoomDataSource @Inject constructor(private val currenciesDao: CurrenciesDao) : CurrencyLocalDataSource {
 
-    override fun getAll(): Flow<Result<List<Currency>>> = currenciesDao.getAll().map { currencyRoomModelList ->
+    override fun getAllAsFlow(): Flow<Result<List<Currency>>> = currenciesDao.getAllAsFlow().map { currencyRoomModelList ->
         if (currencyRoomModelList.isNullOrEmpty()) return@map Result.Error(CurrenciesNotFound)
 
         return@map Result.Success(currencyRoomModelList.toCurrencyList())
     }
+
+    override suspend fun getAll(): List<Currency> = currenciesDao.getAll().toCurrencyList()
 
     override suspend fun updateAllRates(currencyList: List<Currency>) {
         currenciesDao.updateAllRates(currencyList)
