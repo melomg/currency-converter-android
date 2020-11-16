@@ -26,7 +26,7 @@ val UPDATED_CURRENCY_LIST: List<Currency> = mutableListOf(
     Currency("CAD", BigDecimal.valueOf(1.43), 4)
 )
 
-val CURRENCY_LIST: List<Currency> = listOf(
+fun getCurrencyListTestData(): List<Currency> = listOf(
     Currency("EUR", BigDecimal.valueOf(1), 0),
     Currency("AUD", BigDecimal.valueOf(1.6133), 1),
     Currency("BGN", BigDecimal.valueOf(1.9521), 2),
