@@ -15,10 +15,6 @@ android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildToolsVersion
 
-    lintOptions {
-        abortOnError false
-    }
-
     defaultConfig {
         applicationId "io.melih.android.currencyconverter"
         minSdkVersion versions.minSdk
@@ -53,15 +49,6 @@ android {
         prod {
             dimension "default"
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
     }
 
 }
@@ -128,10 +115,6 @@ dependencies {
 
 androidExtensions {
     experimental = true
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 afterEvaluate {

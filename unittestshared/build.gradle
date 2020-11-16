@@ -27,15 +27,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
@@ -46,8 +37,4 @@ dependencies {
     api "org.hamcrest:hamcrest-all:${versions.hamcrest}"
     api "org.mockito:mockito-core:${versions.mockito}"
     api "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitokotlin2}"
-}
-
-kapt {
-    correctErrorTypes = true
 }
